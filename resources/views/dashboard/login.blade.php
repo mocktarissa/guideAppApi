@@ -12,8 +12,7 @@
     <h1>Welcome to the Dashboard</h1>
 
     <form action="/login" method="post">
-        <label for="name">Name</label>
-        <input type="text" id="name">
+
         <input type="email" name="email" id="email">
         <input type="password" name="password" id="passowrd">
         <button type="submit">Login</button>
