@@ -25,12 +25,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //crate poi
-        Gate::define('create-company', function ($user) {
-            return $user->isAdmin;
-        });
-
-        //edit poi
+        // Selft defined 
         Gate::define('edit-settings', function ($user) {
             return $user->isAdmin;
         });
@@ -38,5 +33,31 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('update-post', function ($user, $post) {
             return $user->id === $post->user_id;
         });
+
+        /**
+         * Manage publication of Company and New POI's 
+         */
+        Gate::define('can-publish', function ($user, $post) {
+            return $user->isAdmin;
+        });
+
+
+
+        /**
+         * Manages Company 
+         */
+
+        //delete company
+        Gate::define('delete-company', function ($user, $company) {
+            return $user->isAdmin || $user->id === $company->user_id;
+        });
+        // update company
+        Gate::define('update-company', function ($user, $company) {
+            return $user->isAdmin || $user->id === $company->user_id;
+        });
+
+        /**
+         * Mannages Poi
+         */
     }
 }

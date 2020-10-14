@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 
@@ -15,7 +16,9 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/', [DashboardController::class, 'dashboard']);
-
+Route::middleware(['auth:sanctum', 'verified'])->get('/company/list', [CompanyController::class, 'list']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/company/create', [CompanyController::class, 'create']);
+Route::middleware(['auth:sanctum', 'verified'])->post('/company/store', [CompanyController::class, 'store']);
 Route::get('/test', [DashboardController::class, 'signup'])->middleware('auth');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
