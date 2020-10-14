@@ -14,9 +14,12 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/', [DashboardController::class, 'login']);
-// Route::get('/signup', [DashboardController::class, 'signup']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/', [DashboardController::class, 'dashboard']);
+
+Route::get('/test', [DashboardController::class, 'signup'])->middleware('auth');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'login'])->name('dashboard');

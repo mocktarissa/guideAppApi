@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     //
-    public function login(Request $request)
+    public function dashboard(Request $request)
     {
-        return view('/dashboard/login');
+
+        return view('/dashboard/dashboard');
     }
     public function signup(Request $request)
     {

@@ -17,6 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+    // change this to change the path of the home 
     public const HOME = '/dashboard';
 
     /**
