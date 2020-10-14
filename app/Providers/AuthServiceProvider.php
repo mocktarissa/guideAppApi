@@ -55,6 +55,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('update-company', function ($user, $company) {
             return $user->isAdmin || $user->id === $company->user_id;
         });
+        Gate::define('view-company', function ($user, $company) {
+            return $user->isAdmin || $user->id === $company->user_id;
+        });
 
         /**
          * Mannages Poi

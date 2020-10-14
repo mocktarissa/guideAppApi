@@ -20,12 +20,17 @@
 
 <body>
 
+    I am in here
 
-    @foreach ($companies as $user)
-    <p>Company {{ $user->id }} :</p>
-    <a href="/company/view?id={{$user->id}}">go</a>
-    @endforeach
-
-    <a href="/company/create">Create Company</a>
+    <p>Id: {{ $company->id }}</p>
+    <p>This is: {{ $company->name }}</p>
+    <p>Website: {{ $company->website }}</p>
+    <form action="/company/delete" method="post">
+        <button type="submit">
+            Delete
+        </button>
+    </form>
+    <a href="/company/{{$company->id}}/pois/create">Create New Poi</a>
+    <a href="/company/list">Return to Main list</a>
 
 </html>

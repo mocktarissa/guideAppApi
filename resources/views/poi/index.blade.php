@@ -21,11 +21,13 @@
 <body>
 
 
-    @foreach ($companies as $user)
-    <p>Company {{ $user->id }} :</p>
-    <a href="/company/view?id={{$user->id}}">go</a>
+    @foreach ($pois as $p)
+    <p>
+        <p>This is poi {{$p->name}} </p>
+        <p>Location {{$p->location}} </p>
+    </p>
     @endforeach
 
-    <a href="/company/create">Create Company</a>
+    <a href="/company/{{$company}}/pois/create">Create New Poi</a>
 
 </html>

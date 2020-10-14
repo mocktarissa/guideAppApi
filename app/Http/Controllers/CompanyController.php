@@ -28,6 +28,11 @@ class CompanyController extends Controller
     }
     public function store(Request $request)
     {
+        $request->validate([
+            'website' => 'required|unique:companys|',
+            'phone' => 'required|unique:companys|',
+            'address' => 'required'
+        ]);
         // create a new company for the specified user
         $company = new Company;
         $company->user_id = Auth::id();
@@ -37,7 +42,7 @@ class CompanyController extends Controller
         $company->name = $request->name;
         $company->longlatt = '';
         $company->save();
-
+        // Company::create($request->all());
         return view('/company/create');
     }
 
@@ -57,17 +62,22 @@ class CompanyController extends Controller
     public function view_one(Request $request)
     {
         // show a specific company given its id
-        $company = Company::where('user_id', Auth::id())
-            ->where('id', $request->id)
+        $company = Company::where('id', $request->id)
             ->orderBy('created_at', 'asc')
-            ->get();
-        if (Gate::allows('view-company', $company)) {
-            // shows the current company
-            //will be used to update specific companies
-            return view('/company/company', ['company' => $company]);
-        }
-        if (Gate::denies('view-company', $company)) {
-            // The current user can't viw the company...
+            ->first();
+        if (isset($company)) {
+
+            if (Gate::allows('view-company', $company)) {
+                // shows the current company
+                //will be used to update specific companies
+                return view('/company/one', ['company' => $company]);
+            }
+            if (Gate::denies('view-company', $company)) {
+                // The current user can't viw the company...
+                abort(401);
+            }
+        } else {
+            abort(404);
         }
     }
 }
