@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     use HasFactory;
+    // In contrary of categroies the company plurial is not automatically set
     protected $table = 'companys';
 }

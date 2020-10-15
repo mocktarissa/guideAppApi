@@ -19,7 +19,11 @@
 </head>
 
 <body>
-
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success">
+        <p>{{ $message }}</p>
+    </div>
+    @endif
     I am in here
 
     <p>Id: {{ $company->id }}</p>
@@ -30,7 +34,8 @@
             Delete
         </button>
     </form>
+    <a href="{{route('company.pois.index',$company->id)}}">Show Poi</a>
     <a href="/company/{{$company->id}}/pois/create">Create New Poi</a>
-    <a href="/company/list">Return to Main list</a>
+    <a href="{{route('company.index')}}">Return to Main list</a>
 
 </html>

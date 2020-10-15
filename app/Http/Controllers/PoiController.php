@@ -26,10 +26,12 @@ class PoiController extends Controller
             if (Gate::allows('view-company', $company)) {
                 // shows the current company
                 //will be used to update specific companies
-                $poi = Poi::where('company_id', $request->company)
+
+                $poi = Poi::with('category')
+                    ->where('company_id', $request->company)
                     ->orderBy('created_at', 'asc')
                     ->get();
-                return  view('poi/index', ['pois' => $poi, 'company' => $request->company]);
+                return  view('poi.index', ['pois' => $poi, 'company' => $request->company]);
             }
             if (Gate::denies('view-company', $company)) {
                 // shows the current company
@@ -83,12 +85,15 @@ class PoiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Poi  $poi
-     * @return \Illuminate\Http\Response
+
      */
-    public function show(Poi $poi)
+
+    public function show(Request $request)
     {
         //
+        $poi = Poi::where('id', $request->poi)->get()->first();
+
+        return view('poi.show', ['poi' => $poi, 'company' => $request->company]);
     }
 
     /**
@@ -97,21 +102,38 @@ class PoiController extends Controller
      * @param  \App\Models\Poi  $poi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Poi $poi)
+    public function edit(Request $request)
     {
         //
+        $poi =  Poi::with('category')->where('id', $request->poi)->get()->first();
+        return view('poi.edit', ['poi' => $poi, 'company' => $request->company]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Poi  $poi
-     * @return \Illuminate\Http\Response
+
      */
-    public function update(Request $request, Poi $poi)
+    public function update(Request $request, Company $company, Poi $poi)
     {
         //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'url' => 'required',
+
+        ]);
+        // $poi = Poi::find('id', $request->poi);
+        $poi->location = $request->location;
+        $poi->name = $request->name;
+        $poi->description = $request->description;
+        $poi->url = $request->url;
+        $poi->category_id = $request->category;
+        $poi->save();
+
+
+        return redirect()->route('company.pois.index', ['company' => $request->company])
+            ->with('success', 'Project updated successfully');
     }
 
     /**
@@ -120,8 +142,11 @@ class PoiController extends Controller
      * @param  \App\Models\Poi  $poi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Poi $poi)
+    public function destroy(Request $request, Company $company, Poi $poi)
     {
-        //
+        $poi->delete();
+
+        return redirect()->route('company.pois.index', $company)
+            ->with('success', 'Project deleted successfully');
     }
 }
