@@ -16,6 +16,8 @@
     @routes
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -34,17 +36,17 @@
 
             </a>
             <form action="{{ route('company.pois.destroy', ['company'=>$company,'poi'=>$poi->id]) }}" method="POST">
-                <a href="{{ route('company.pois.edit', ['company'=>$company,'poi'=>$poi->id]) }}">
-                    <i class="fas fa-edit  fa-lg"></i> Edit
+                <a href="{{ route('company.pois.edit', ['company'=>$company,'poi'=>$poi->id]) }}" class="form-control" style='display:inline'>
+                    <i class="fa fa-edit  fa-lg"></i> Edit
 
                 </a>
                 @csrf
                 @method('DELETE')
 
-                <button type="submit" title="delete" style="border: none; background-color:transparent;">
-                    <i class="fas fa-trash fa-lg text-danger"></i>
+                <a type="submit" title="delete" style="border: none; background-color:transparent;" class="form-control" style='display:inline'>
+                    <i class="fa fa-trash fa-lg text-danger"></i>
                     Delete
-                </button>
+                </a>
             </form>
         </div>
     </div>

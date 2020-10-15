@@ -16,6 +16,8 @@
     @routes
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -24,9 +26,9 @@
         <p>{{ $message }}</p>
     </div>
     @endif
-    <table>
+    <table class="table container">
         <thead>
-            <th>No</th>
+            <th> <b>#</b></th>
             <th>Name</th>
             <th>Location</th>
             <th>Description</th>
@@ -47,21 +49,21 @@
                 <td>{{$p->url}}</td>
                 <td>{{$p->category->name}}</td>
                 <td>
-                    <a href="{{ route('company.pois.show', ['company'=>$company,'poi'=>$p->id]) }}" title="show">
+                    <a href="{{ route('company.pois.show', ['company'=>$company,'poi'=>$p->id]) }}" title="show" class="btn btn-primary">
                         <i class="fas fa-eye text-success  fa-lg"></i> Show
                     </a>
                     <form action="{{ route('company.pois.destroy', ['company'=>$company,'poi'=>$p->id]) }}" method="POST">
-                        <a href="{{ route('company.pois.edit', ['company'=>$company,'poi'=>$p->id]) }}">
+                        <a href="{{ route('company.pois.edit', ['company'=>$company,'poi'=>$p->id]) }}" class="btn btn-primary">
                             <i class="fas fa-edit  fa-lg"></i> Edit
 
                         </a>
                         @csrf
                         @method('DELETE')
 
-                        <button type="submit" title="delete" style="border: none; background-color:transparent;">
+                        <a type="submit" title="delete" class="btn btn-danger">
                             <i class="fas fa-trash fa-lg text-danger"></i>
                             Delete
-                        </button>
+                        </a>
                     </form>
 
                 </td>
@@ -70,9 +72,11 @@
 
         </tbody>
     </table>
+    <br>
+    <div class="container">
 
-
-    <a href="{{route('company.pois.create',$company)}}">Create New Poi</a>
-    <a href="{{route('company.index')}}">Return to Main list</a>
+        <a href="{{route('company.pois.create',$company)}}" class="btn btn-warning">Create New Poi</a>
+        <a href="{{route('company.index')}}" class="btn btn-info">Return to Main list</a>
+    </div>
 
 </html>

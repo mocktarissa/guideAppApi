@@ -16,9 +16,16 @@
     @routes
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
 </head>
 
 <body>
+
+    <div class=" container">
+
+        <a href=" {{route('company.create')}} " class=" btn btn-warning">Create Company</a>
+    </div>
     <form method="POST" action="{{ route('logout') }}">
         @csrf
 
@@ -32,58 +39,57 @@
         <p>{{ $message }}</p>
     </div>
     @endif
-    <table>
-        <thead>
-            <th>No </th>
-            <th> Name </th>
-            <th>Address </th>
-            <th>Website </th>
-            <th>Phone Number</th>
-            <th>Action</th>
-        </thead>
-        <tbody>
-            @php($itter= 1)
-            @foreach ($companies as $company)
-            <tr>
-                <td>{{ $itter }}</td>
-                @php($itter++)
-                <td>{{ $company->name }}</td>
-                <td>{{ $company->address }}</td>
-                <td>{{ $company->website }}</td>
-                <td>{{ $company->phone_number }}</td>
-                <td>
+    <div class="">
 
-                    <a href="{{route('company.show',$company->id)}}">go</a>
-                    <a href="{{ route('company.edit', $company->id) }}">
-                        <i class="fas fa-edit  fa-lg"></i> Edit
-                    </a>
-                    <form action="{{ route('company.destroy', $company->id) }}" method="POST">
-                        <a href="{{ route('company.show', $company->id) }}" title="show">
-                            <i class="fas fa-eye text-success  fa-lg"></i>
-                        </a>
-                        <a href="{{ route('company.edit', $company->id) }}">
-                            <i class="fas fa-edit  fa-lg"></i>
-
-                        </a>
-                        @csrf
-                        @method('DELETE')
-
-                        <button type="submit" title="delete" style="border: none; background-color:transparent;">
-                            <i class="fas fa-trash fa-lg text-danger"></i>
-                            Delete
-                        </button>
-                    </form>
-                </td>
+        <table class="table table-hover container text-justify">
+            <thead>
+                <th><b>#</b> </th>
+                <th> Name </th>
+                <th>Address </th>
+                <th>Website </th>
+                <th>Phone Number</th>
+                <th colspan="5">Action</th>
+            </thead>
+            <tbody>
+                @php($itter= 1)
+                @foreach ($companies as $company)
+                <tr>
+                    <td>{{ $itter }}</td>
+                    @php($itter++)
+                    <td>{{ $company->name }}</td>
+                    <td>{{ $company->address }}</td>
+                    <td><a href="">{{ $company->website }}</a></td>
+                    <td><a href="" type="tel">{{ $company->phone_number }}</a></td>
+                    <td colspan="5">
 
 
+                        <form action="{{ route('company.destroy', $company->id) }}" method="POST">
 
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+                            <a href="{{ route('company.show', $company->id) }}" title="show" class="btn btn-primary">
+                                <i class="fas fa-eye text-success"></i>Show
+                            </a>
+                            <a href="{{ route('company.edit', $company->id) }}" class='btn btn-secondary'>
+                                <i class="fa fa-edit"></i>
+                                Edit
+                            </a>
+                            @csrf
+                            @method('DELETE')
+                            <a type="submit" title="delete" class='btn btn-danger'>
+                                <i class="fa fa-trash" "></i>
+                                Delete
+                            </a>
+                        </form>
+                    </td>
 
 
-    <a href="{{route('company.create')}} ">Create Company</a>
+
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+
 
 
 </html>

@@ -56,13 +56,13 @@
         <form action="/company" method="post">
             @csrf
             <label for="name">Company Name</label>
-            <input type="text" id="name" name="name">
+            <input type="text" id="name" name="name" class="form-control">
             <label for="adress">Address</label>
-            <input type="text" id="adress" name="address">
+            <input type="text" id="adress" name="address" class="form-control">
             <label for="phone_number">Phone Number</label>
-            <input type="tel" id="phone_number" name='phone_number'>
+            <input type="tel" id="phone_number" name='phone_number' class="form-control">
             <label for="website"> Website </label>
-            <input type="url" name='website' id='website'>
+            <input type="url" name='website' id='website' class="form-control">
 
             <button type="submit">Create</button>
             <a href="/company/list">Return to Main list</a>

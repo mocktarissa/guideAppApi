@@ -5,31 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    @livewireStyles
-    <!-- Fonts -->
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-    <!-- Styles -->
-    <!-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> -->
-
-    <!-- Scripts -->
-    @routes
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script> -->
-    <!-- <script src="{{ mix('js/app.js') }}" defer></script> -->
 </head>
 
 <body>
+    <div class="container form-group">
 
-    <!DOCTYPE html>
-    <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dashboard</title>
-    </head>
-
-    <body>
         <form method="POST" action="{{ route('logout') }}">
             @csrf
 
@@ -54,24 +36,24 @@
         </div>
         @endif
         <form action="{{ route('company.update', $company->id) }}" method="post">
-            @csrf
-            @method('PUT')
-            <label for="name">Company Name</label>
-            <input type="text" id="name" name="name" value="{{ $company->name }}">
-            <label for=" adress">Address</label>
-            <input type="text" id="adress" name="address" value="{{ $company->address }}">
-            <label for=" phone_number">Phone Number</label>
-            <input type="tel" id="phone_number" name='phone_number' value="{{ $company->phone_number }}">
-            <label for=" website"> Website </label>
-            <input type="url" name='website' id='website' value="{{ $company->website }}">
-
-            <button type=" submit">Save</button>
-            <a href="{{route('company.index')}}">Return to Main list</a>
+            <div class="form-group">
+                @csrf
+                @method('PUT')
+                <label for="name">Company Name</label>
+                <input type="text" id="name" name="name" value="{{ $company->name }}" class="form-control">
+                <label for=" adress">Address</label>
+                <input type="text" id="adress" name="address" value="{{ $company->address }}" class="form-control">
+                <label for=" phone_number">Phone Number</label>
+                <input type="tel" id="phone_number" name='phone_number' value="{{ $company->phone_number }}" class="form-control">
+                <label for=" website"> Website </label>
+                <input type="url" name='website' id='website' value="{{ $company->website }}" class="form-control">
+                <br>
+                <button type="submit" class='btn btn-primary'>Save</button>
+                <a href="{{route('company.index')}}" class="btn btn-info">Return to Main list</a>
+            </div>
         </form>
 
-    </body>
-
-    </html>
-
+    </div>
+</body>
 
 </html>
