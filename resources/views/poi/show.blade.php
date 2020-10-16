@@ -40,6 +40,7 @@
                     <i class="fa fa-edit  fa-lg"></i> Edit
 
                 </a>
+                // sends token
                 @csrf
                 @method('DELETE')
 
