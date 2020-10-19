@@ -133,7 +133,7 @@ class PoiController extends Controller
 
 
         return redirect()->route('company.pois.index', ['company' => $request->company])
-            ->with('success', 'Project updated successfully');
+            ->with('success', 'Poi updated successfully');
     }
 
     /**
