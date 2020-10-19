@@ -79,7 +79,7 @@ class PoiController extends Controller
         $poi->category_id = $request->category;
         $poi->save();
         return redirect()->route('company.pois.index', [$request->company])
-            ->with('success', 'Project created successfully.');
+            ->with('success', 'Poi created successfully.');
     }
 
     /**
