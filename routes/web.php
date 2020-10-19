@@ -19,13 +19,13 @@ use App\Http\Controllers\PoiApiController;
 |
 */
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/', [DashboardController::class, 'dashboard']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/', [CompanyController::class, 'index']);
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/company/list', [CompanyController::class, 'list']);
 // Route::middleware(['auth:sanctum', 'verified'])->get('/company/create', [CompanyController::class, 'create']);
 // Route::middleware(['auth:sanctum', 'verified'])->post('/company/store', [CompanyController::class, 'store']);
 // Route::middleware(['auth:sanctum', 'verified'])->get('/company/view', [CompanyController::class, 'view_one']);
-Route::get('/test', [DashboardController::class, 'signup'])->middleware('auth');
+// Route::get('/test', [DashboardController::class, 'signup'])->middleware('auth');
 Route::resource('company.pois', PoiController::class)->middleware('auth');
 Route::resource('company', CompanyController::class)->middleware('auth');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
