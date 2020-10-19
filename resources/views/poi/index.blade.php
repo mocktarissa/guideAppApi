@@ -62,10 +62,10 @@
                         @csrf
                         @method('DELETE')
 
-                        <a style="display: block; margin-top:2px" type="submit" title="delete" class="btn btn-danger">
+                        <button style=" margin-top:2px" type="submit" title="delete" class="btn btn-danger">
                             <i class="fas fa-trash fa-lg text-danger"></i>
                             Delete
-                        </a>
+                        </button>
                     </form>
 
                 </td>

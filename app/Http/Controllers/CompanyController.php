@@ -44,7 +44,7 @@ class CompanyController extends Controller
         $company->save();
         // Company::create($request->all());
         return redirect()->route('company.index',)
-            ->with('success', 'Project created successfully.');
+            ->with('success', 'Company created successfully.');
     }
     // display the edit page
     public function edit(Company $company)
@@ -70,7 +70,7 @@ class CompanyController extends Controller
         // $company->update($request->all());
 
         return redirect()->route('company.index')
-            ->with('success', 'Project updated successfully');
+            ->with('success', 'Company updated successfully');
     }
 
 
@@ -105,6 +105,6 @@ class CompanyController extends Controller
         $company->delete();
 
         return redirect()->route('company.index')
-            ->with('success', 'Project deleted successfully');
+            ->with('success', 'Company deleted successfully');
     }
 }

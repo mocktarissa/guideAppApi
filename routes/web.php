@@ -4,6 +4,10 @@ use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PoiController;
+use App\Http\Controllers\CompanyApiController;
+use App\Http\Controllers\PoiApiController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,3 +33,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'login'])->name('dashboard');
+Route::get('/api/company/', [CompanyApiController::class, 'index']);
+Route::get('/api/company/{company}', [CompanyApiController::class, 'show']);
+
+Route::get('/api/company/{company}/pois', [PoiApiController::class, 'index']);
+Route::get('/api/company/{company}/pois/{poi}', [PoiApiController::class, 'show']);
