@@ -17,10 +17,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
     <script src="{{ mix('js/app.js') }}" defer></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+</head>
 
 </head>
 
 <body>
+
     @if ($message = Session::get('success'))
     <div class="alert alert-success">
         <p>{{ $message }}</p>
@@ -34,41 +36,41 @@
             <th>Description</th>
             <th>Url</th>
             <th>Category</th>
-            <th>Action</th>
+            <th colspan="4">Action</th>
         </thead>
         @php($itter=1)
         <tbody>
-            <tr>
-                @foreach ($pois as $p)
+            @foreach ($pois as $p)
+            <tr style="align-items: center;">
 
-                <td>{{$itter}}</td>
+                <td style="vertical-align: middle;">{{$itter}}</td>
                 @php($itter++)
-                <td>{{$p->name}}</td>
-                <td>{{$p->location}}</td>
-                <td>{{$p->description}}</td>
-                <td>{{$p->url}}</td>
-                <td>{{$p->category->name}}</td>
+                <td style="vertical-align: middle;">{{$p->name}}</td>
+                <td style="vertical-align: middle;">{{$p->location}}</td>
+                <td style="vertical-align: middle;">{{$p->description}}</td>
+                <td style="vertical-align: middle;">{{$p->url}}</td>
+                <td style="vertical-align: middle;">{{$p->category->name}}</td>
                 <td>
-                    <a href="{{ route('company.pois.show', ['company'=>$company,'poi'=>$p->id]) }}" title="show" class="btn btn-primary">
+                    <a style="display: block; margin-top:2px" href="{{ route('company.pois.show', ['company'=>$company,'poi'=>$p->id]) }}" title="show" class="btn btn-primary">
                         <i class="fas fa-eye text-success  fa-lg"></i> Show
                     </a>
                     <form action="{{ route('company.pois.destroy', ['company'=>$company,'poi'=>$p->id]) }}" method="POST">
-                        <a href="{{ route('company.pois.edit', ['company'=>$company,'poi'=>$p->id]) }}" class="btn btn-primary">
+                        <a style="display: block; margin-top:2px" href="{{ route('company.pois.edit', ['company'=>$company,'poi'=>$p->id]) }}" class="btn btn-warning">
                             <i class="fas fa-edit  fa-lg"></i> Edit
 
                         </a>
                         @csrf
                         @method('DELETE')
 
-                        <a type="submit" title="delete" class="btn btn-danger">
+                        <a style="display: block; margin-top:2px" type="submit" title="delete" class="btn btn-danger">
                             <i class="fas fa-trash fa-lg text-danger"></i>
                             Delete
                         </a>
                     </form>
 
                 </td>
-                @endforeach
             </tr>
+            @endforeach
 
         </tbody>
     </table>
@@ -78,5 +80,7 @@
         <a href="{{route('company.pois.create',$company)}}" class="btn btn-warning">Create New Poi</a>
         <a href="{{route('company.index')}}" class="btn btn-info">Return to Main list</a>
     </div>
+
+</body>
 
 </html>

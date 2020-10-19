@@ -147,6 +147,6 @@ class PoiController extends Controller
         $poi->delete();
 
         return redirect()->route('company.pois.index', $company)
-            ->with('success', 'Project deleted successfully');
+            ->with('success', 'Poi deleted successfully');
     }
 }
