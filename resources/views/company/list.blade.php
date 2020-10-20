@@ -74,10 +74,10 @@
                             </a>
                             @csrf
                             @method('DELETE')
-                            <a type="submit" title="delete" class='btn btn-danger'>
+                            <button type="submit" title="delete" class='btn btn-danger'>
                                 <i class="fa fa-trash" "></i>
                                 Delete
-                            </a>
+</button>
                         </form>
                     </td>
 
