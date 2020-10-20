@@ -50,12 +50,12 @@
                 <td style="vertical-align: middle;">{{$p->description}}</td>
                 <td style="vertical-align: middle;">{{$p->url}}</td>
                 <td style="vertical-align: middle;">{{$p->category->name}}</td>
-                <td>
-                    <a style="display: block; margin-top:2px" href="{{ route('company.pois.show', ['company'=>$company,'poi'=>$p->id]) }}" title="show" class="btn btn-primary">
-                        <i class="fas fa-eye text-success  fa-lg"></i> Show
-                    </a>
+                <td colspan="5">
                     <form action="{{ route('company.pois.destroy', ['company'=>$company,'poi'=>$p->id]) }}" method="POST">
-                        <a style="display: block; margin-top:2px" href="{{ route('company.pois.edit', ['company'=>$company,'poi'=>$p->id]) }}" class="btn btn-warning">
+                        <a style=" margin-top:2px" href="{{ route('company.pois.show', ['company'=>$company,'poi'=>$p->id]) }}" title="show" class="btn btn-primary">
+                            <i class="fas fa-eye text-success  fa-lg"></i> Show
+                        </a>
+                        <a style=" margin-top:2px" href="{{ route('company.pois.edit', ['company'=>$company,'poi'=>$p->id]) }}" class="btn btn-warning">
                             <i class="fas fa-edit  fa-lg"></i> Edit
 
                         </a>
