@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Company;
@@ -42,6 +43,11 @@ class CompanyController extends Controller
         $company->name = $request->name;
         $company->longlatt = '';
         $company->save();
+        //create a null category for each new company
+        $category = new Category();
+        $category->name = 'nonePtridX';
+        $category->company_id = $company->id;
+        $category->save();
         // Company::create($request->all());
         return redirect()->route('company.index',)
             ->with('success', 'Company created successfully.');

@@ -49,7 +49,15 @@
                 <td style="vertical-align: middle;">{{$p->location}}</td>
                 <td style="vertical-align: middle;">{{$p->description}}</td>
                 <td style="vertical-align: middle;">{{$p->url}}</td>
-                <td style="vertical-align: middle;">{{$p->category->name}}</td>
+                <td style="vertical-align: middle;">
+
+                    @if ($p->category->name !='nonePtridX')
+                    {{$p->category->name}}
+
+                    @else
+                    None
+                    @endif
+                </td>
                 <td colspan="5">
                     <form action="{{ route('company.pois.destroy', ['company'=>$company,'poi'=>$p->id]) }}" method="POST">
                         <a style=" margin-top:2px" href="{{ route('company.pois.show', ['company'=>$company,'poi'=>$p->id]) }}" title="show" class="btn btn-primary">
