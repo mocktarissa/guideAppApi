@@ -106,24 +106,6 @@ class PoiController extends Controller
             return redirect()->route('company.pois.index', [$request->company])
                 ->with('success', 'Project created successfully.');
         }
-
-        // $categories = Category::where(['name' => $request->category, 'company_id' => $request->company])->get();
-        // $poi->category_id = Category::where(['company_id' => $request->company, 'name' => $request->category])
-        //     ->orderBy('created_at', 'asc')
-        //     ->get()->first();
-
-        // if (isEmpty($categories)) {
-        //     $category = new Category;
-        //     $category->name = $request->category;
-        //     $category->company_id = $request->company;
-        //     $poi->category_id = $request->category;
-        // } else if ($request->category === '') {
-
-        //     $poi->category_id = $none_category->id;
-        // }
-
-
-
     }
 
     /**
