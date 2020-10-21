@@ -24,7 +24,7 @@
         @endif
         <div class="container">
 
-            <form class='container' action="{{route('company.pois.store')}}" method="post">
+            <form class='container' action="{{route('company.pois.store',['company'=>$company])}}" method="post">
                 <div class="form-group">
 
                     @csrf
