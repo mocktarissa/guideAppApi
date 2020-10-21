@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Company;
 use App\Models\Category;
+use Error;
 use Mockery\Undefined;
 
 use function PHPUnit\Framework\isEmpty;
@@ -72,38 +73,42 @@ class PoiController extends Controller
             'description' => 'required',
             'url' => 'required|unique:pois|',
         ]);
-        $none_category = Category::where('name', 'nonePtridX')->get()->first();
-        $poi = new Poi;
-        $poi->company_id = $request->company;
-        $poi->location = $request->location;
-        $poi->name = $request->name;
-        $poi->description = $request->description;
-        $poi->url = $request->url;
-        if ($request->category === null) {
+        try {
+            $none_category = Category::where('name', 'nonePtridX')->get()->first();
+            $poi = new Poi;
+            $poi->company_id = $request->company;
+            $poi->location = $request->location;
+            $poi->name = $request->name;
+            $poi->description = $request->description;
+            $poi->url = $request->url;
+            if ($request->category === null) {
 
-            $poi->category_id = $none_category->id;
-            $poi->save();
-            return redirect()->route('company.pois.index', [$request->company])
-                ->with('success', 'Project created successfully.');
-        }
-        $categories = Category::where(['name' => $request->category, 'company_id' => $request->company])->get();
-        if ($categories->isEmpty()) {
-            $category = new Category;
-            $category->name = $request->category;
-            $category->company_id = $request->company;
-            $category->save();
-            $poi->category_id = $category->id;
-            $poi->save();
-            return redirect()->route('company.pois.index', [$request->company])
-                ->with('success', 'Project created successfully.');
-        } else {
-            $temp = Category::where('name', $request->category)
-                ->orderBy('created_at', 'asc')
-                ->get()->first();
-            $poi->category_id = $temp->id;
-            $poi->save();
-            return redirect()->route('company.pois.index', [$request->company])
-                ->with('success', 'Project created successfully.');
+                $poi->category_id = $none_category->id;
+                $poi->save();
+                return redirect()->route('company.pois.index', [$request->company])
+                    ->with('success', 'Project created successfully.');
+            }
+            $categories = Category::where(['name' => $request->category, 'company_id' => $request->company])->get();
+            if ($categories->isEmpty()) {
+                $category = new Category;
+                $category->name = $request->category;
+                $category->company_id = $request->company;
+                $category->save();
+                $poi->category_id = $category->id;
+                $poi->save();
+                return redirect()->route('company.pois.index', [$request->company])
+                    ->with('success', 'Project created successfully.');
+            } else {
+                $temp = Category::where('name', $request->category)
+                    ->orderBy('created_at', 'asc')
+                    ->get()->first();
+                $poi->category_id = $temp->id;
+                $poi->save();
+                return redirect()->route('company.pois.index', [$request->company])
+                    ->with('success', 'Project created successfully.');
+            }
+        } catch (Error $e) {
+            abort(501);
         }
     }
 
