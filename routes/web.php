@@ -29,7 +29,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/', [CompanyController::cl
 // Route::get('/test', [DashboardController::class, 'signup'])->middleware('auth');
 Route::resource('company', CompanyController::class)->middleware('auth');
 Route::resource('company.category', CategoryController::class)->middleware('auth');
-Route::resource('company.pois', PoiController::class)->middleware('auth')->only(['create']);
+Route::resource('company.pois', PoiController::class)->middleware('auth')->except(['store']);
+Route::post('/api/company/{company}/pois', [PoiController::class, 'store']);
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
