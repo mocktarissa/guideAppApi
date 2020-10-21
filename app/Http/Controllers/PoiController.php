@@ -95,10 +95,7 @@ class PoiController extends Controller
         // } catch (Exception $e) {
         //     abort('401');
         // }
-        $poi = Poi::with('category')
-            ->where('company_id', $request->company)
-            ->orderBy('created_at', 'asc')
-            ->get();
+        $poi = Category::get();
         return  view('poi.index', ['pois' => $poi, 'company' => $request->company]);
     }
 
