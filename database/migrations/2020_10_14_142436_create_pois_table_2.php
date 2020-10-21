@@ -16,15 +16,7 @@ class CreatePoisTable2 extends Migration
 
         Schema::create('pois', function (Blueprint $table) {
             //
-            $table->engine = 'InnoDB';
-            $table->id();
-            $table->timestamps();
-            $table->foreignId('company_id')->constrained('companys');
-            $table->string('name');
-            $table->text('location');
-            $table->text('description');
-            $table->text('url')->unique();
-            $table->foreignId('category_id')->constrained('categories');
+
         });
     }
 
@@ -37,6 +29,15 @@ class CreatePoisTable2 extends Migration
     {
         Schema::table('pois', function (Blueprint $table) {
             //
+            $table->engine = 'InnoDB';
+            $table->id();
+            $table->timestamps();
+            $table->foreignId('company_id')->constrained('companys');
+            $table->string('name');
+            $table->text('location');
+            $table->text('description');
+            $table->text('url')->unique();
+            $table->foreignId('category_id')->constrained('categories');
         });
     }
 }
