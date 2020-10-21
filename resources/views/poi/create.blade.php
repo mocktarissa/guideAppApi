@@ -37,7 +37,7 @@
                     <label for="url"> Url </label>
                     <input type="url" name='url' id='url' class="form-control">
                     <br>
-                    <input type="text" name="category">
+                    <input type="text" name="category" class="form-control">
                     <!-- I can auto fill the category $category->name -->
                     <br>
                     <button class="btn btn-primary" type="submit">Create</button>
