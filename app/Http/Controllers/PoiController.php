@@ -96,7 +96,7 @@ class PoiController extends Controller
         //     abort('401');
         // }
         $poi = Category::get();
-        return  view('poi.index', ['pois' => $poi, 'company' => $request->company]);
+        return view('category.test', ['pois' => $poi]);
     }
 
     /**
