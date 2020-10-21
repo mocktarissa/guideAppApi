@@ -6,7 +6,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PoiController;
 use App\Http\Controllers\CompanyApiController;
 use App\Http\Controllers\PoiApiController;
-
+use App\Http\Controllers\CategoryController;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/', [CompanyController::cl
 // Route::middleware(['auth:sanctum', 'verified'])->get('/company/view', [CompanyController::class, 'view_one']);
 // Route::get('/test', [DashboardController::class, 'signup'])->middleware('auth');
 Route::resource('company.pois', PoiController::class)->middleware('auth');
+Route::resource('company.category', CategoryController::class)->middleware('auth');
 Route::resource('company', CompanyController::class)->middleware('auth');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
