@@ -52,10 +52,10 @@ class PoiController extends Controller
     public function create(Request $request)
     {
         //
-        $categories = Category::where('company_id', $request->company)
-            ->orderBy('created_at', 'asc')
-            ->get();
-        return view('/poi/create', ['company' => $request->company, 'categories' => $categories]);
+        // $categories = Category::where('company_id', $request->company)
+        //     ->orderBy('created_at', 'asc')
+        //     ->get();
+        return view('/poi/create', ['company' => $request->company]);
     }
 
     /**
@@ -71,7 +71,6 @@ class PoiController extends Controller
             'name' => 'required',
             'description' => 'required',
             'url' => 'required|unique:pois|',
-
         ]);
         $none_category = Category::where('name', 'nonePtridX')->get()->first();
         $poi = new Poi;
