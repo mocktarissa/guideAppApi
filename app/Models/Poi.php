@@ -13,19 +13,4 @@ class Poi extends Model
     {
         return $this->belongsTo(Category::class);
     }
-
-
-
-    // public function getWithCategory($gameId, $playerId)
-    // {
-    //     $gameData = C::with(['GamePlayer.User:id,name,unique_id'])
-    //         ->where('id', $gameId)
-    //         ->whereHas(
-    //             'GamePlayer',
-    //             function ($q) use ($playerId) {
-    //                 $q->where('player_id', $playerId);
-    //             }
-    //         )->first();
-    //     return $gameData;
-    // }
 }
