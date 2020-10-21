@@ -9,7 +9,7 @@
 
 <body>
     <p>Test here</p>
-    {{$user}}
+    {{$pois}}
 </body>
 
 </html>

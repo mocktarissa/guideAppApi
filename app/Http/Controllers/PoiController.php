@@ -65,11 +65,11 @@ class PoiController extends Controller
     public function store(Request $request)
     {
         //This architecture is not very efficient [needs to be modified after the MVP]
-        // $request->validate([
-        //     'name' => 'required',
-        //     'description' => 'required',
-        //     'url' => 'required|unique:pois|',
-        // ]);
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'url' => 'required|unique:pois|',
+        ]);
         $temp = $request->category;
         if ($temp == null) {
             $temp = 'nonePtridX';
@@ -87,8 +87,9 @@ class PoiController extends Controller
         $poi->url = $request->url;
         $poi->category_id = $category->id;
         $poi->save();
-        return redirect()->route('company.pois.index', [$request->company])
-            ->with('success', 'Project created successfully.');
+        // return redirect()->route('company.pois.index', [$request->company])
+        // ->with('success', 'Project created successfully.');
+        return view('category.test', ['pois' => $poi]);
     }
 
     /**
