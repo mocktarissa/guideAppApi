@@ -36,12 +36,12 @@
             <input type="text" id="description" name='description' value="{{$poi->description}}" class='form-control'>
             <label for="url"> Url </label>
             <input type="url" name='url' id='url' value="{{$poi->url}}" class='form-control'>
-            <select name="category">
+            <select name="category" class='form-control'>
 
                 <option value="{{$poi->category->id}}">{{$poi->category->name}}</option>
 
             </select>
-            <button type="submit">Save</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
 
