@@ -36,7 +36,8 @@
             <input type="text" id="description" name='description' value="{{$poi->description}}" class='form-control'>
             <label for="url"> Url </label>
             <input type="url" name='url' id='url' value="{{$poi->url}}" class='form-control'>
-            <select name="category" class='form-control'>
+            <label for="category"></label>
+            <select name="category" class='form-control' id="category">
 
                 <option value="{{$poi->category->id}}">{{$poi->category->name}}</option>
 
