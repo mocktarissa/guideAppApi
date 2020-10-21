@@ -65,11 +65,11 @@ class PoiController extends Controller
     public function store(Request $request)
     {
         //This architecture is not very efficient [needs to be modified after the MVP]
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'url' => 'required|unique:pois|',
-        ]);
+        // $request->validate([
+        //     'name' => 'required',
+        //     'description' => 'required',
+        //     'url' => 'required|unique:pois|',
+        // ]);
         $temp = $request->category;
         if ($temp == null) {
             $temp = 'nonePtridX';
@@ -89,30 +89,6 @@ class PoiController extends Controller
         $poi->save();
         return redirect()->route('company.pois.index', [$request->company])
             ->with('success', 'Project created successfully.');
-        // if ($request->category === null) {
-
-        //     $poi->category_id = $none_category->id;
-        //     $poi->save();
-        //     return redirect()->route('company.pois.index', [$request->company])
-        //         ->with('success', 'Project created successfully.');
-        // }
-        // $categories = Category::where(['name' => $request->category, 'company_id' => $request->company])->get();
-        // if ($categories->isEmpty()) {
-        //     $category = new Category;
-        //     $category->name = $request->category;
-        //     $category->company_id = $request->company;
-        //     $category->save();
-
-
-        // } else {
-        //     $temp = Category::where('name', $request->category)
-        //         ->orderBy('created_at', 'asc')
-        //         ->get()->first();
-        //     $poi->category_id = $temp->id;
-        //     $poi->save();
-        //     return redirect()->route('company.pois.index', [$request->company])
-        //         ->with('success', 'Project created successfully.');
-        // }
     }
 
     /**
