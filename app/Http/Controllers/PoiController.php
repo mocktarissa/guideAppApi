@@ -72,13 +72,25 @@ class PoiController extends Controller
             'description' => 'required',
             'url' => 'required|unique:pois|',
         ]);
-        // $none_category = Category::where('name', 'nonePtridX')->get()->first();
-        // $poi = new Poi;
-        // $poi->company_id = $request->company;
-        // $poi->location = $request->location;
-        // $poi->name = $request->name;
-        // $poi->description = $request->description;
-        // $poi->url = $request->url;
+        $temp = $request->category;
+        if ($temp == null) {
+            $temp = 'nonePtridX';
+        }
+        $category = Category::firstOrCreate([
+            'name' => $temp,
+            'company_id' => $request->company,
+        ]);
+
+        $poi = new Poi;
+        $poi->company_id = $request->company;
+        $poi->location = $request->location;
+        $poi->name = $request->name;
+        $poi->description = $request->description;
+        $poi->url = $request->url;
+        $poi->category_id = $category->id;
+        $poi->save();
+        return redirect()->route('company.pois.index', [$request->company])
+            ->with('success', 'Project created successfully.');
         // if ($request->category === null) {
 
         //     $poi->category_id = $none_category->id;
@@ -92,10 +104,8 @@ class PoiController extends Controller
         //     $category->name = $request->category;
         //     $category->company_id = $request->company;
         //     $category->save();
-        //     $poi->category_id = $category->id;
-        //     $poi->save();
-        //     return redirect()->route('company.pois.index', [$request->company])
-        //         ->with('success', 'Project created successfully.');
+
+
         // } else {
         //     $temp = Category::where('name', $request->category)
         //         ->orderBy('created_at', 'asc')

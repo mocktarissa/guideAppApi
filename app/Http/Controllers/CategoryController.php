@@ -15,10 +15,10 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         //to modify 
-        $poi = Category::where('company_id', $request->company)
+        $category = Category::where('company_id', $request->company)
             ->orderBy('created_at', 'asc')
             ->get();
-        return  view('category.index', ['pois' => $poi, 'company' => $request->company]);
+        return  view('category.index', ['pois' => $category, 'company' => $request->company]);
     }
 
     /**
