@@ -64,37 +64,42 @@ class PoiController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        // try {
 
-            //This architecture is not very efficient [needs to be modified after the MVP]
-            $request->validate([
-                'name' => 'required',
-                'description' => 'required',
-                'url' => 'required|unique:pois|',
-            ]);
-            $temp = $request->category;
-            if ($temp == null) {
-                $temp = 'nonePtridX';
-            }
-            $category = Category::firstOrCreate([
-                'name' => $temp,
-                'company_id' => $request->company,
-            ]);
+        //     //This architecture is not very efficient [needs to be modified after the MVP]
+        //     $request->validate([
+        //         'name' => 'required',
+        //         'description' => 'required',
+        //         'url' => 'required|unique:pois|',
+        //     ]);
+        //     $temp = $request->category;
+        //     if ($temp == null) {
+        //         $temp = 'nonePtridX';
+        //     }
+        //     $category = Category::firstOrCreate([
+        //         'name' => $temp,
+        //         'company_id' => $request->company,
+        //     ]);
 
-            $poi = new Poi;
-            $poi->company_id = $request->company;
-            $poi->location = $request->location;
-            $poi->name = $request->name;
-            $poi->description = $request->description;
-            $poi->url = $request->url;
-            $poi->category_id = $category->id;
-            $poi->save();
-            // return redirect()->route('company.pois.index', [$request->company])
-            // ->with('success', 'Project created successfully.');
-            return view('category.test', ['pois' => $poi]);
-        } catch (Exception $e) {
-            abort('401');
-        }
+        //     $poi = new Poi;
+        //     $poi->company_id = $request->company;
+        //     $poi->location = $request->location;
+        //     $poi->name = $request->name;
+        //     $poi->description = $request->description;
+        //     $poi->url = $request->url;
+        //     $poi->category_id = $category->id;
+        //     $poi->save();
+        //     // return redirect()->route('company.pois.index', [$request->company])
+        //     // ->with('success', 'Project created successfully.');
+        //     return view('category.test', ['pois' => $poi]);
+        // } catch (Exception $e) {
+        //     abort('401');
+        // }
+        $poi = Poi::with('category')
+            ->where('company_id', $request->company)
+            ->orderBy('created_at', 'asc')
+            ->get();
+        return  view('poi.index', ['pois' => $poi, 'company' => $request->company]);
     }
 
     /**
