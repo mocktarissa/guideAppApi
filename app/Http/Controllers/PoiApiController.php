@@ -21,7 +21,9 @@ class PoiApiController extends Controller
             ->orderBy('created_at', 'asc')
             ->get();
 
-        return  response()->json($poi->makeHidden(['id', 'created_at', 'category_id', 'company_id', 'updated_at', 'category=>updated_at']));
+        return  response()->json($poi);
+        // return  response()->json($poi->makeHidden(['id', 'created_at', 'category_id', 'company_id', 'updated_at', 'category=>updated_at']));
+
     }
 
     /**
