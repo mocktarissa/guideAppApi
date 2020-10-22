@@ -56,7 +56,7 @@ class PoiApiController extends Controller
     public function show($companyid, $id)
     {
         //
-        $poi = Poi::where(['id' => $id, 'company_id' => $companyid])->get();
+        $poi = Poi::with('category')->where(['id' => $id, 'company_id' => $companyid])->get();
         return response()->json($poi);
     }
 
