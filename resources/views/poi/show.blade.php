@@ -23,10 +23,13 @@
 <body>
 
     <div class="container">
+
         <div>
             Point of interest <p>{{$poi->name}}</p>
         </div>
         <br>
+        <img style="width: 100%; height: 100%;" src="<?php echo asset("storage/$poi->picture1") ?>"></img>
+
         <div>
 
             <p>{{$poi->location}}</p>

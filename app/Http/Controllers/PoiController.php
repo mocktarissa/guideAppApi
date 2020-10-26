@@ -9,8 +9,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Company;
 use App\Models\Category;
 use Mockery\Undefined;
-
+use Illuminate\Support\Facades\Storage;
 use function PHPUnit\Framework\isEmpty;
+
+use Intervention\Image\ImageManagerStatic as Image;
+
+use Illuminate\Support\Facades\File;
 
 class PoiController extends Controller
 {
@@ -80,14 +84,47 @@ class PoiController extends Controller
             'name' => $temp,
             'company_id' => $request->company,
         ]);
+        $picture1 = $request->file('picture1');
+        $picture2 = $request->file('picture2');
+        $picture3 = $request->file('picture3');
+        $picture4 = $request->file('picture4');
+        $picture5 = $request->file('picture5');
+        $picture6 = $request->file('picture6');
 
+        $extension1 = $picture1->getClientOriginalExtension();
+        $extension2 = $picture2->getClientOriginalExtension();
+        $extension3 = $picture3->getClientOriginalExtension();
+        $extension4 = $picture4->getClientOriginalExtension();
+        $extension5 = $picture5->getClientOriginalExtension();
+        $extension6 = $picture6->getClientOriginalExtension();
+        Storage::disk('public')->put($picture1->getFilename() . '.' . $extension1,  File::get($picture1));
+        Storage::disk('public')->put($picture2->getFilename() . '.' . $extension2,  File::get($picture2));
+        Storage::disk('public')->put($picture3->getFilename() . '.' . $extension3,  File::get($picture3));
+        Storage::disk('public')->put($picture4->getFilename() . '.' . $extension4,  File::get($picture4));
+        Storage::disk('public')->put($picture5->getFilename() . '.' . $extension5,  File::get($picture5));
+        Storage::disk('public')->put($picture6->getFilename() . '.' . $extension6,  File::get($picture6));
+
+
+        // $path1 = Storage::putFile('public/poiPictures', new \Illuminate\Http\File($request->file('picture1')), 'public');
+        // $path2 = Storage::putFile('public/poiPictures', new \Illuminate\Http\File($request->file('picture2')), 'public');
+        // $path3 = Storage::putFile('public/poiPictures', new \Illuminate\Http\File($request->file('picture3')), 'public');
+        // $path4 = Storage::putFile('public/poiPictures', new \Illuminate\Http\File($request->file('picture4')), 'public');
+        // $path5 = Storage::putFile('public/poiPictures', new \Illuminate\Http\File($request->file('picture5')), 'public');
+        // $path6 = Storage::putFile('public/poiPictures', new \Illuminate\Http\File($request->file('picture6')), 'public');
         $poi = new Poi;
         $poi->company_id = $request->company;
         $poi->location = $request->location;
         $poi->name = $request->name;
         $poi->description = $request->description;
         $poi->url = $request->url;
+        $poi->picture1 = $picture1->getFilename() . '.' . $extension1;
+        $poi->picture2 = $picture2->getFilename() . '.' . $extension2;
+        $poi->picture3 = $picture3->getFilename() . '.' . $extension3;
+        $poi->picture4 = $picture4->getFilename() . '.' . $extension4;
+        $poi->picture5 = $picture5->getFilename() . '.' . $extension5;
+        $poi->picture6 = $picture6->getFilename() . '.' . $extension6;
         $poi->category_id = $category->id;
+
         $poi->save();
         return redirect()->route('company.pois.index', [$request->company])
             ->with('success', 'Project created successfully.');
@@ -99,6 +136,7 @@ class PoiController extends Controller
      *
 
      */
+
 
     public function show(Request $request)
     {

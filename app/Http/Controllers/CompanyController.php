@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Company;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
+
 
 class CompanyController extends Controller
 {
@@ -27,6 +29,7 @@ class CompanyController extends Controller
 
         return view('/company/create');
     }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -34,6 +37,7 @@ class CompanyController extends Controller
             'phone_number' => 'required|unique:companys|',
             'address' => 'required'
         ]);
+        $path = Storage::putFile('public/logos', $request->file('logo'));
         // create a new company for the specified user
         $company = new Company;
         $company->user_id = Auth::id();
@@ -42,6 +46,7 @@ class CompanyController extends Controller
         $company->website = $request->website;
         $company->name = $request->name;
         $company->longlatt = '';
+        $company->logo = $path;
         $company->save();
         //create a null category for each new company
         $category = new Category();

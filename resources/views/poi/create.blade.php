@@ -24,7 +24,7 @@
         @endif
         <div class="container">
 
-            <form class='container' action="{{route('company.pois.store',['company'=>$company])}}" method="post">
+            <form class='container' action="{{route('company.pois.store',['company'=>$company])}}" method="post" enctype="multipart/form-data">
                 <div class="form-group">
 
                     @csrf
@@ -34,10 +34,34 @@
                     <input type="text" id="location" name="location" class="form-control">
                     <label for="description">Description</label>
                     <input type="text" id="description" name='description' class="form-control">
+                    <br>
                     <label for="url"> Url </label>
                     <input type="url" name='url' id='url' class="form-control">
-                    <br>
+
                     <input type="text" name="category" class="form-control">
+
+                    <label for="picture1"> Url </label>
+                    <input type="file" name='picture1' id='picture1' class="form-control">
+
+
+
+
+                    <label for="picture2"> Url </label>
+                    <input type="file" name='picture2' id='picture2' class="form-control">
+
+                    <label for="picture3"> Url </label>
+                    <input type="file" name='picture3' id='picture3' class="form-control">
+
+                    <label for="picture1"> Url </label>
+                    <input type="file" name='picture4' id='picture4' class="form-control">
+
+
+
+                    <label for="picture5"> Url </label>
+                    <input type="file" name='picture5' id='picture5' class="form-control">
+
+                    <label for="picture6"> Url </label>
+                    <input type="file" name='picture6' id='picture6' class="form-control">
                     <!-- I can auto fill the category $category->name -->
                     <br>
                     <button class="btn btn-primary" type="submit">Create</button>

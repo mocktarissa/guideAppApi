@@ -35,7 +35,7 @@
             </ul>
         </div>
         @endif
-        <form action="/company" method="post">
+        <form action="/company" method="post" enctype="multipart/form-data">
             @csrf
             <label for="name">Company Name</label>
             <input type="text" id="name" name="name" class="form-control">
@@ -45,6 +45,8 @@
             <input type="tel" id="phone_number" name='phone_number' class="form-control">
             <label for="website"> Website </label>
             <input type="url" name='website' id='website' class="form-control">
+            <label for="logo"> Company Logo </label>
+            <input type="file" name='logo' id='logo' class="form-control">
             <button type="submit" class="btn btn-primary">Create</button>
             <a href="/company/list" class="btn">Return to Main list</a>
         </form>
