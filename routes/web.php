@@ -8,6 +8,7 @@ use App\Http\Controllers\CompanyApiController;
 use App\Http\Controllers\PoiApiController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QrCodeApiController;
+use App\Http\Controllers\QrCodeController;
 use App\Models\Category;
 
 /*
@@ -30,6 +31,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/', [CompanyController::cl
 // Route::get('/test', [DashboardController::class, 'signup'])->middleware('auth');
 Route::resource('company', CompanyController::class)->middleware('auth');
 Route::resource('company.category', CategoryController::class)->middleware('auth');
+Route::resource('qrcode', QrCodeController::class)->middleware('auth');
 Route::resource('company.pois', PoiController::class)->middleware('auth'); //->except(['store'])
 // Route::post('/val/company/{company}/pois', [PoiController::class, 'store']);
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

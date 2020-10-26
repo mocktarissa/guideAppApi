@@ -12,7 +12,7 @@ class QrCodeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
     }
@@ -22,9 +22,10 @@ class QrCodeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        return view('/qrcode/create', ['company' => $request->company]);
     }
 
     /**
@@ -36,6 +37,13 @@ class QrCodeController extends Controller
     public function store(Request $request)
     {
         //
+        $qrcode = new QrCode();
+        $qrcode->poi_id = $request->poi_id;
+        $qrcode->value = $request->value;
+        $qrcode->url = $request->url;
+        $qrcode->save();
+        return redirect()->route('qrcode.index')
+            ->with('success', 'Project created successfully.');
     }
 
     /**
