@@ -25,7 +25,7 @@
     @endif
     <div class="container">
 
-        <form action="{{route('company.pois.update',['company'=>$company,'poi'=>$poi->id])}}" method="post">
+        <form action="{{route('company.pois.update',['company'=>$company,'poi'=>$poi->id])}}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <label for="name">Name of Attraction</label>
@@ -38,8 +38,26 @@
             <input type="url" name='url' id='url' value="{{$poi->url}}" class='form-control'>
             <label for="category"></label>
             <select name="category" class='form-control' id="category">
+                <label for="picture1"> Url </label>
+                <input type="file" name='picture1' id='picture1' class="form-control">
 
-                <option value="{{$poi->category->id}}">{{$poi->category->name}}</option>
+
+
+
+                <label for="picture2"> Url </label>
+                <input type="file" name='picture2' id='picture2' class="form-control">
+
+                <label for="picture3"> Url </label>
+                <input type="file" name='picture3' id='picture3' class="form-control">
+
+                <label for="picture1"> Url </label>
+                <input type="file" name='picture4' id='picture4' class="form-control">
+
+                <label for="picture5"> Url </label>
+                <input type="file" name='picture5' id='picture5' class="form-control">
+
+                <label for="picture6"> Url </label>
+                <input type="file" name='picture6' <option value="{{$poi->category->id}}">{{$poi->category->name}}</option>
 
             </select>
             <button type="submit" class="btn btn-primary">Save</button>
