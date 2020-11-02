@@ -19,7 +19,7 @@ class CompanyController extends Controller
         // list all the companies of a user
         $companies = Company::where('user_id', Auth::id())
             ->orderBy('created_at', 'asc')
-            ->take(10)
+            ->take(30)
             ->get();
 
         return view('/company/list', ['companies' => $companies]);
@@ -40,7 +40,8 @@ class CompanyController extends Controller
             'address' => 'required',
             'logo' => 'required|file'
         ]);
-        $path = $request->file('logo')->store('logos');
+        $path = $request->file('logo')->store('logos', 's3');
+        Storage::disk('s3')->setVisibility($path, 'public');
         // create a new company for the specified user
         $company = new Company;
         $company->user_id = Auth::id();
@@ -49,7 +50,7 @@ class CompanyController extends Controller
         $company->website = $request->website;
         $company->name = $request->name;
         $company->longlatt = '';
-        $company->logo = $path;
+        $company->logo = Storage::disk('s3')->url($path);
         $company->save();
         //create a null category for each new company
         $category = new Category();
