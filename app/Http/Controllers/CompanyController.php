@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
 use App\Models\Category;
@@ -32,12 +33,14 @@ class CompanyController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'website' => 'required|unique:companys|',
             'phone_number' => 'required|unique:companys|',
-            'address' => 'required'
+            'address' => 'required',
+            'logo' => 'required|file'
         ]);
-        $path = Storage::putFile('public/logos', $request->file('logo'));
+        $path = $request->file('logo')->store('logos');
         // create a new company for the specified user
         $company = new Company;
         $company->user_id = Auth::id();
@@ -71,12 +74,14 @@ class CompanyController extends Controller
             'website' => 'required',
             'phone_number' => 'required'
         ]);
+        $path = $request->file('logo')->store('logos');
         // $company = Company::find($company);
         $company->address = $request->address;
         $company->phone_number = $request->phone_number;
         $company->website = $request->website;
         $company->name = $request->name;
         $company->longlatt = '';
+        $company->logo = $path;
         $company->save();
         // $company->update($request->all());
 

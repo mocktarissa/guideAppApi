@@ -32,8 +32,8 @@
 
             <b> {{ $company->name }}</b>
         </h4>
+        <img src="{{$company->logo}}" alt="" width="150px">
         <div class=" text-center">
-
             <p>Id: {{ $company->id }}</p>
             <p>This is: {{ $company->name }}</p>
             <p>Website: {{ $company->website }}</p>

@@ -47,6 +47,8 @@
                 <input type="tel" id="phone_number" name='phone_number' value="{{ $company->phone_number }}" class="form-control">
                 <label for=" website"> Website </label>
                 <input type="url" name='website' id='website' value="{{ $company->website }}" class="form-control">
+                <label for="logo"> Company Logo </label>
+                <input type="file" name='logo' id='logo' class="form-control">
                 <br>
                 <button type="submit" class='btn btn-primary'>Save</button>
                 <a href="{{route('company.index')}}" class="btn btn-info">Return to Main list</a>
