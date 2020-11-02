@@ -11,9 +11,10 @@ class Company extends Model
     // In contrary of categroies the company plurial is not automatically set
     protected $table = 'companys';
     protected $guarded = [];
-    public function getLogoAttribute($value)
+    public function getLogoAttribute()
     {
 
-        return asset($value ?: '/test.png');
+        return
+            asset('storage/' . $this->attributes['logo']);
     }
 }
