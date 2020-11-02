@@ -84,25 +84,25 @@ class PoiController extends Controller
             'name' => $temp,
             'company_id' => $request->company,
         ]);
-        $picture1 = $request->file('picture1');
-        $picture2 = $request->file('picture2');
-        $picture3 = $request->file('picture3');
-        $picture4 = $request->file('picture4');
-        $picture5 = $request->file('picture5');
-        $picture6 = $request->file('picture6');
+        $picture1 = $request->file('picture1')->store('pictures', 's3');
+        $picture2 = $request->file('picture2')->store('pictures', 's3');
+        $picture3 = $request->file('picture3')->store('pictures', 's3');
+        $picture4 = $request->file('picture4')->store('pictures', 's3');
+        $picture5 = $request->file('picture5')->store('pictures', 's3');
+        $picture6 = $request->file('picture6')->store('pictures', 's3');
 
-        $extension1 = $picture1->getClientOriginalExtension();
-        $extension2 = $picture2->getClientOriginalExtension();
-        $extension3 = $picture3->getClientOriginalExtension();
-        $extension4 = $picture4->getClientOriginalExtension();
-        $extension5 = $picture5->getClientOriginalExtension();
-        $extension6 = $picture6->getClientOriginalExtension();
-        Storage::disk('public')->put($picture1->getFilename() . '.' . $extension1,  File::get($picture1));
-        Storage::disk('public')->put($picture2->getFilename() . '.' . $extension2,  File::get($picture2));
-        Storage::disk('public')->put($picture3->getFilename() . '.' . $extension3,  File::get($picture3));
-        Storage::disk('public')->put($picture4->getFilename() . '.' . $extension4,  File::get($picture4));
-        Storage::disk('public')->put($picture5->getFilename() . '.' . $extension5,  File::get($picture5));
-        Storage::disk('public')->put($picture6->getFilename() . '.' . $extension6,  File::get($picture6));
+        // $extension1 = $picture1->getClientOriginalExtension();
+        // $extension2 = $picture2->getClientOriginalExtension();
+        // $extension3 = $picture3->getClientOriginalExtension();
+        // $extension4 = $picture4->getClientOriginalExtension();
+        // $extension5 = $picture5->getClientOriginalExtension();
+        // $extension6 = $picture6->getClientOriginalExtension();
+        Storage::disk('s3')->setVisibility($picture1, 'public');
+        Storage::disk('s3')->setVisibility($picture2, 'public');
+        Storage::disk('s3')->setVisibility($picture3, 'public');
+        Storage::disk('s3')->setVisibility($picture4, 'public');
+        Storage::disk('s3')->setVisibility($picture5, 'public');
+        Storage::disk('s3')->setVisibility($picture6, 'public');
 
 
         // $path1 = Storage::putFile('public/poiPictures', new \Illuminate\Http\File($request->file('picture1')), 'public');
@@ -117,12 +117,13 @@ class PoiController extends Controller
         $poi->name = $request->name;
         $poi->description = $request->description;
         $poi->url = $request->url;
-        $poi->picture1 = $picture1->getFilename() . '.' . $extension1;
-        $poi->picture2 = $picture2->getFilename() . '.' . $extension2;
-        $poi->picture3 = $picture3->getFilename() . '.' . $extension3;
-        $poi->picture4 = $picture4->getFilename() . '.' . $extension4;
-        $poi->picture5 = $picture5->getFilename() . '.' . $extension5;
-        $poi->picture6 = $picture6->getFilename() . '.' . $extension6;
+
+        $poi->picture1 = Storage::disk('s3')->url($picture1);
+        $poi->picture2 = Storage::disk('s3')->url($picture2);
+        $poi->picture3 = Storage::disk('s3')->url($picture3);
+        $poi->picture4 = Storage::disk('s3')->url($picture4);
+        $poi->picture5 = Storage::disk('s3')->url($picture5);
+        $poi->picture6 = Storage::disk('s3')->url($picture6);
         $poi->category_id = $category->id;
 
         $poi->save();
