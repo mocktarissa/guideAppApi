@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Poi;
 use App\Models\QrCode;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class QrCodeController extends Controller
     public function create(Request $request)
     {
         //
-        return view('/qrcode/create', ['company' => $request->company]);
+        $poi = Poi::where('company_id', $request->company)->get();
+        return view('/qrcode/create', ['company' => $request->company, 'poi' => $poi]);
     }
 
     /**
@@ -40,7 +42,7 @@ class QrCodeController extends Controller
         $qrcode = new QrCode();
         $qrcode->poi_id = $request->poi_id;
         $qrcode->value = $request->value;
-        $qrcode->url = $request->url;
+        // $qrcode->url = $request->url;
         $qrcode->save();
         return redirect()->route('qrcode.index')
             ->with('success', 'Project created successfully.');

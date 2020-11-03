@@ -20,7 +20,6 @@ class CreateQrCodes extends Migration
             $table->timestamps();
             $table->foreignId('poi_id')->constrained('pois');
             $table->string('value')->unique();
-            $table->string('url');
         });
     }
 

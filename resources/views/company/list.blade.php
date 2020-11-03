@@ -25,6 +25,7 @@
     <div class=" container">
 
         <a href=" {{route('company.create')}} " class=" btn btn-warning">Create Company</a>
+
     </div>
     <form method="POST" action="{{ route('logout') }}">
         @csrf

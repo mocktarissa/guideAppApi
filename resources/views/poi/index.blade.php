@@ -87,6 +87,7 @@
 
         <a href="{{route('company.pois.create',$company)}}" class="btn btn-warning">Create New Poi</a>
         <a href="{{route('company.index')}}" class="btn btn-info">Return to Main list</a>
+        <a href="{{route('company.qrcode.create',$company)}}" class="btn btn-secondary">Create Qr code</a>
     </div>
 
 </body>

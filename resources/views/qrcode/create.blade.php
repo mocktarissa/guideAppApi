@@ -24,17 +24,25 @@
         @endif
         <div class="container">
             Map a new QR Code
-            <form class='container' action="{{route('qrcode.store',['company'=>$company])}}" method="post" enctype="multipart/form-data">
+            <form class='container' action="{{route('company.qrcode.store',['company'=>$company])}}" method="post" enctype="multipart/form-data">
                 <div class="form-group">
 
                     @csrf
                     <label for="poi">Poi</label>
-                    <input type="text" id="poi" name="poi_id" class="form-control">
+
+                    <select id="poi" name="poi_id" class="form-control">
+                        @foreach($poi as $p)
+                        <option value="{{$p->id}}">
+                            {{$p->name}}
+                        </option>
+                        @endforeach
+                    </select>
+                    <br>
                     <label for="location">Value</label>
                     <input type="text" id="location" name="value" class="form-control">
                     <br>
-                    <label for="url"> Url </label>
-                    <input type="url" name='url' id='url' class="form-control">
+
+
                     <!-- I can auto fill the category $category->name -->
                     <br>
                     <button class="btn btn-primary" type="submit">Create</button>
