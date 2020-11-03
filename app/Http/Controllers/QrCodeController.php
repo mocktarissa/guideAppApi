@@ -18,7 +18,7 @@ class QrCodeController extends Controller
     {
         //
         $poi = Poi::where('company_id', $request->company)->get();
-        
+
         $qrcodes = QrCode::with(['poi' => function ($query)  use ($request) {
             $query->where('company_id', $request->company_id);
         }])->get();
@@ -52,7 +52,7 @@ class QrCodeController extends Controller
         $qrcode->value = $request->value;
         // $qrcode->url = $request->url;
         $qrcode->save();
-        return redirect()->route('company.qrcode.index')
+        return redirect()->route('company.qrcode.index', ['company' => $request->company])
             ->with('success', 'Project created successfully.');
     }
 
