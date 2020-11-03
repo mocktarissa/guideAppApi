@@ -1,20 +1,3 @@
-@if ($message = Session::get('success'))
-<div class="alert alert-success">
-    <p>{{ $message }}</p>
-</div>
-@endif
-
-<div>
-    @foreach ($qrcodes as $qrcode)
-    <p>
-        qrcode
-    </p>
-    @endforeach
-    {{$qrcodes}}
-</div>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,11 +31,9 @@
     <table class="table container">
         <thead>
             <th> <b>#</b></th>
-            <th>Name</th>
-            <th>Location</th>
-            <th>Description</th>
-            <th>Url</th>
-            <th>Category</th>
+            <th>Poi Name</th>
+            <th>Qr Code Value</th>
+            <th>Number Of Scans</th>
             <th colspan="4">Action</th>
         </thead>
         @php($itter=1)
