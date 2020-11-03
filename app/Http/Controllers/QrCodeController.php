@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Poi;
 use App\Models\QrCode;
+use Doctrine\DBAL\Schema\View;
 use Illuminate\Http\Request;
 
 class QrCodeController extends Controller
@@ -16,6 +17,13 @@ class QrCodeController extends Controller
     public function index(Request $request)
     {
         //
+        $poi = Poi::where('company_id', $request->company)->get();
+        
+        $qrcodes = QrCode::with(['poi' => function ($query)  use ($request) {
+            $query->where('company_id', $request->company_id);
+        }])->get();
+
+        return View('qrcode/index', ['company' => $request->company, 'qrcodes' => $qrcodes]);
     }
 
     /**
@@ -44,7 +52,7 @@ class QrCodeController extends Controller
         $qrcode->value = $request->value;
         // $qrcode->url = $request->url;
         $qrcode->save();
-        return redirect()->route('qrcode.index')
+        return redirect()->route('company.qrcode.index')
             ->with('success', 'Project created successfully.');
     }
 
