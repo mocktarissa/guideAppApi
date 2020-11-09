@@ -28,13 +28,51 @@
             Point of interest <p>{{$poi->name}}</p>
         </div>
         <br>
-        <img style="width: 100%; height: 100%;" src="<?php echo asset("storage/$poi->picture1") ?>"></img>
 
         <div>
+            <div class="container" style="display: flex; flex-direction:row; flex-wrap:wrap">
 
-            <p>{{$poi->location}}</p>
-            <p>{{$poi->description}}</p>
+                <div class="card" style="width: 18rem;">
+
+                    <img src="{{$poi->picture1}}" class="card-img-top" alt="">
+
+                </div>
+
+                <div class="card" style="width: 18rem;">
+
+                    <img src="{{$poi->picture2}}" class="d-block w-100" alt="">
+
+                </div>
+                <div class="card" style="width: 18rem;">
+
+                    <img src="{{$poi->picture3}}" class="d-block w-100" alt="">
+
+                </div>
+                <div class="card" style="width: 18rem;">
+
+                    <img src="{{$poi->picture4}}" class="d-block w-100" alt="">
+
+                </div>
+                <div class="card" style="width: 18rem;">
+
+                    <img src="{{$poi->picture5}}" class="d-block w-100" alt="">
+
+                </div>
+                <div class="card" style="width: 18rem;">
+
+                    <img src="{{$poi->picture6}}" class="d-block w-100" alt="">
+
+                </div>
+            </div>
+
+            <div class="center">
+
+                <p>{{$poi->location}}</p>
+                <p>{{$poi->description}}</p>
+            </div>
         </div>
+
+
         <div>
 
             </a>
@@ -54,5 +92,8 @@
             </form>
         </div>
     </div>
+
+
+
 
 </html>
