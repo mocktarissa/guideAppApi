@@ -25,7 +25,10 @@
     <div class="container">
 
         <div>
-            Point of interest <p>{{$poi->name}}</p>
+            <h3>
+
+                {{$poi->name}}
+            </h3>
         </div>
         <br>
 
@@ -67,8 +70,9 @@
 
             <div class="center">
 
-                <p>{{$poi->location}}</p>
-                <p>{{$poi->description}}</p>
+
+                <p><b>Location: </b> <br>{{$poi->location}}</p>
+                <p><b>Description: </b><br> {{$poi->description}}</p>
             </div>
         </div>
 
