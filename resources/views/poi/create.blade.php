@@ -45,11 +45,7 @@
 
                     <label for="picture1"> Picture </label>
                     <input type="file" name='picture1' id='picture1' class="form-control">
-
-
-
-
-                    <label for="picture2"> Picture </label>
+                  <label for="picture2"> Picture </label>
                     <input type="file" name='picture2' id='picture2' class="form-control">
 
                     <label for="picture3"> Picture </label>

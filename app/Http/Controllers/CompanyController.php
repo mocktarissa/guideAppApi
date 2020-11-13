@@ -63,7 +63,7 @@ class CompanyController extends Controller
         $company->phone_number = $request->phone_number;
         $company->website = $request->website;
         $company->name = $request->name;
-        $company->longlatt = '';
+        $company->longlatt = $request->longlatt;
         $company->logo = Storage::disk('s3')->url($path);
         $company->save();
         //create a null category for each new company
