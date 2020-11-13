@@ -19,7 +19,7 @@ class CreateCategories extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('company_id')->constrained('companys');
-            $table->string('name')->default('none')->change();
+            $table->string('name')->default('none');
         });
     }
 
