@@ -31,9 +31,9 @@
                     <label for="name">Create a new POI</label>
                     <input type="text" id="name" name="name" class="form-control" value="{{ old('name') }}">
                     <label for=" location">Location</label>
-                    <input type="text" id="location" name="location" class="form-control">
+                    <input type="text" id="location" name="location" class="form-control" value="{{ old('location') }}">
                     <label for="description">Description</label>
-                    <textarea id="description" name='description' class="form-control">
+                    <textarea id="description" name='description' class="form-control" value="{{ old('description') }}">
 
                     </textarea>
                     <br>
@@ -41,26 +41,26 @@
                     <input type="url" name='url' id='url' class="form-control">
 
                     <label for="category">Category</label>
-                    <input type="text" id='category' name="category" class="form-control">
+                    <input type="text" id='category' name="category" class="form-control" value="{{ old('category') }}">
 
                     <label for="picture1"> Picture </label>
-                    <input type="file" name='picture1' id='picture1' class="form-control">
+                    <input type="file" name='picture1' id='picture1' class="form-control" value="{{ old('picture1') }}">
                     <label for="picture2"> Picture </label>
-                    <input type="file" name='picture2' id='picture2' class="form-control">
+                    <input type="file" name='picture2' id='picture2' class="form-control" value="{{ old('picture2') }}">
 
                     <label for="picture3"> Picture </label>
-                    <input type="file" name='picture3' id='picture3' class="form-control">
+                    <input type="file" name='picture3' id='picture3' class="form-control" value="{{ old('picture3') }}">
 
-                    <label for="picture1"> Picture</label>
-                    <input type="file" name='picture4' id='picture4' class="form-control">
+                    <label for="picture4"> Picture</label>
+                    <input type="file" name='picture4' id='picture4' class="form-control" value="{{ old('picture4') }}">
 
 
 
                     <label for="picture5"> Picture </label>
-                    <input type="file" name='picture5' id='picture5' class="form-control">
+                    <input type="file" name='picture5' id='picture5' class="form-control" value="{{ old('picture5') }}">
 
                     <label for="picture6"> Picture </label>
-                    <input type="file" name='picture6' id='picture6' class="form-control">
+                    <input type="file" name='picture6' id='picture6' class="form-control" value="{{ old('picture6') }}">
                     <!-- I can auto fill the category $category->name -->
                     <br>
                     <button class="btn btn-primary" type="submit">Create</button>
