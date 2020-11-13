@@ -33,34 +33,37 @@
                     <label for="location">Location</label>
                     <input type="text" id="location" name="location" class="form-control">
                     <label for="description">Description</label>
-                    <input type="text" id="description" name='description' class="form-control">
+                    <textarea id="description" name='description' class="form-control">
+
+                    </textarea>
                     <br>
                     <label for="url"> Url </label>
                     <input type="url" name='url' id='url' class="form-control">
 
-                    <input type="text" name="category" class="form-control">
+                    <label for="category"> Url </label>
+                    <input type="text" id='category' name="category" class="form-control">
 
-                    <label for="picture1"> Url </label>
+                    <label for="picture1"> Picture </label>
                     <input type="file" name='picture1' id='picture1' class="form-control">
 
 
 
 
-                    <label for="picture2"> Url </label>
+                    <label for="picture2"> Picture </label>
                     <input type="file" name='picture2' id='picture2' class="form-control">
 
-                    <label for="picture3"> Url </label>
+                    <label for="picture3"> Picture </label>
                     <input type="file" name='picture3' id='picture3' class="form-control">
 
-                    <label for="picture1"> Url </label>
+                    <label for="picture1"> Picture</label>
                     <input type="file" name='picture4' id='picture4' class="form-control">
 
 
 
-                    <label for="picture5"> Url </label>
+                    <label for="picture5"> Picture </label>
                     <input type="file" name='picture5' id='picture5' class="form-control">
 
-                    <label for="picture6"> Url </label>
+                    <label for="picture6"> Picture </label>
                     <input type="file" name='picture6' id='picture6' class="form-control">
                     <!-- I can auto fill the category $category->name -->
                     <br>
