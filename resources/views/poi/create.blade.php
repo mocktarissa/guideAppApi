@@ -68,7 +68,7 @@
             </form>
         </div>
 
-        <a href="{{route('company.pois.index')}}" class="btn btn-primary">Return to lIst</a>
+        <a href="{{route('company.pois.index',['company'=>$company])}}" class="btn btn-primary">Return to lIst</a>
 
         <a href="{{route('company.index')}}" class="btn btn-info">Return to Main list</a>
 
