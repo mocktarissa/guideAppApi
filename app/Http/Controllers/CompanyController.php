@@ -37,15 +37,29 @@ class CompanyController extends Controller
         $request->validate([
             'website' => 'required|unique:companys|',
             'phone_number' => 'required|unique:companys|',
-            'address' => 'required',
-            'logo' => 'required|file'
+
+            'logo' => 'required|file',
+            'city' => 'required',
+            'province' => 'required',
+            'neighbourhood' => 'required',
+            'address_line1' => 'required',
+
+            'address_line2' => 'required',
         ]);
+
         $path = $request->file('logo')->store('logos', 's3');
         Storage::disk('s3')->setVisibility($path, 'public');
         // create a new company for the specified user
         $company = new Company;
         $company->user_id = Auth::id();
-        $company->address = $request->address;
+
+        $company->city = $request->city;
+        $company->province = $request->province;
+        $company->neighbourhood = $request->neighbourhood; // mahalle
+        $company->phone_number = $request->phone_number;
+        $company->address_line1 = $request->address_line1;
+        $company->address_line2 = $request->address_line2;
+        $company->postal_code = $request->postal_code;
         $company->phone_number = $request->phone_number;
         $company->website = $request->website;
         $company->name = $request->name;
@@ -70,19 +84,32 @@ class CompanyController extends Controller
     {
         // update a specific company of the user
         $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-            'website' => 'required',
-            'phone_number' => 'required'
+            'website' => 'required|unique:companys|',
+            'phone_number' => 'required|unique:companys|',
+
+            'logo' => 'required|file',
+            'city' => 'required',
+            'province' => 'required',
+            'neighbourhood' => 'required',
+            'address_line1' => 'required',
+
+            'address_line2' => 'required',
         ]);
-        $path = $request->file('logo')->store('logos');
+        $path =
+            $request->file('logo')->store('logos', 's3');
         // $company = Company::find($company);
-        $company->address = $request->address;
+        $company->city = $request->city;
+        $company->province = $request->province;
+        $company->neighbourhood = $request->neighbourhood; // mahalle
+        $company->phone_number = $request->phone_number;
+        $company->address_line1 = $request->address_line1;
+        $company->address_line2 = $request->address_line2;
+        $company->postal_code = $request->postal_code;
         $company->phone_number = $request->phone_number;
         $company->website = $request->website;
         $company->name = $request->name;
         $company->longlatt = '';
-        $company->logo = $path;
+        $company->logo =        Storage::disk('s3')->url($path);
         $company->save();
         // $company->update($request->all());
 

@@ -76,6 +76,7 @@ class PoiController extends Controller
             'description' => 'required',
             'url' => 'required|unique:pois|',
         ]);
+
         $temp = $request->category;
         if ($temp == null) {
             $temp = 'nonePtridX';
@@ -84,46 +85,51 @@ class PoiController extends Controller
             'name' => $temp,
             'company_id' => $request->company,
         ]);
-        $picture1 = $request->file('picture1')->store('pictures', 's3');
-        $picture2 = $request->file('picture2')->store('pictures', 's3');
-        $picture3 = $request->file('picture3')->store('pictures', 's3');
-        $picture4 = $request->file('picture4')->store('pictures', 's3');
-        $picture5 = $request->file('picture5')->store('pictures', 's3');
-        $picture6 = $request->file('picture6')->store('pictures', 's3');
-
-        // $extension1 = $picture1->getClientOriginalExtension();
-        // $extension2 = $picture2->getClientOriginalExtension();
-        // $extension3 = $picture3->getClientOriginalExtension();
-        // $extension4 = $picture4->getClientOriginalExtension();
-        // $extension5 = $picture5->getClientOriginalExtension();
-        // $extension6 = $picture6->getClientOriginalExtension();
-        Storage::disk('s3')->setVisibility($picture1, 'public');
-        Storage::disk('s3')->setVisibility($picture2, 'public');
-        Storage::disk('s3')->setVisibility($picture3, 'public');
-        Storage::disk('s3')->setVisibility($picture4, 'public');
-        Storage::disk('s3')->setVisibility($picture5, 'public');
-        Storage::disk('s3')->setVisibility($picture6, 'public');
 
 
-        // $path1 = Storage::putFile('public/poiPictures', new \Illuminate\Http\File($request->file('picture1')), 'public');
-        // $path2 = Storage::putFile('public/poiPictures', new \Illuminate\Http\File($request->file('picture2')), 'public');
-        // $path3 = Storage::putFile('public/poiPictures', new \Illuminate\Http\File($request->file('picture3')), 'public');
-        // $path4 = Storage::putFile('public/poiPictures', new \Illuminate\Http\File($request->file('picture4')), 'public');
-        // $path5 = Storage::putFile('public/poiPictures', new \Illuminate\Http\File($request->file('picture5')), 'public');
-        // $path6 = Storage::putFile('public/poiPictures', new \Illuminate\Http\File($request->file('picture6')), 'public');
+
+
+
+
+
+
         $poi = new Poi;
         $poi->company_id = $request->company;
         $poi->location = $request->location;
         $poi->name = $request->name;
         $poi->description = $request->description;
         $poi->url = $request->url;
+        if (null !== ($request->file('picture1'))) {
+            $picture1 = $request->file('picture1')->store('pictures', 's3');
+            Storage::disk('s3')->setVisibility($picture1, 'public');
+            $poi->picture1 = Storage::disk('s3')->url($picture1);
+        }
+        if (null !== ($request->file('picture2'))) {
+            $picture2 = $request->file('picture2')->store('pictures', 's3');
+            Storage::disk('s3')->setVisibility($picture2, 'public');
+            $poi->picture2 = Storage::disk('s3')->url($picture2);
+        }
+        if (null !== ($request->file('picture3'))) {
+            $picture3 = $request->file('picture3')->store('pictures', 's3');
+            Storage::disk('s3')->setVisibility($picture3, 'public');
+            $poi->picture3 = Storage::disk('s3')->url($picture3);
+        }
+        if (null !== ($request->file('picture4'))) {
+            $picture4 = $request->file('picture4')->store('pictures', 's3');
+            Storage::disk('s3')->setVisibility($picture4, 'public');
+            $poi->picture4 = Storage::disk('s3')->url($picture4);
+        }
+        if (null !== ($request->file('picture5'))) {
+            $picture5 = $request->file('picture5')->store('pictures', 's3');
+            Storage::disk('s3')->setVisibility($picture5, 'public');
+            $poi->picture5 = Storage::disk('s3')->url($picture5);
+        }
+        if (null !== ($request->file('picture6'))) {
+            $picture6 = $request->file('picture6')->store('pictures', 's3');
+            Storage::disk('s3')->setVisibility($picture6, 'public');
+            $poi->picture6 = Storage::disk('s3')->url($picture6);
+        }
 
-        $poi->picture1 = Storage::disk('s3')->url($picture1);
-        $poi->picture2 = Storage::disk('s3')->url($picture2);
-        $poi->picture3 = Storage::disk('s3')->url($picture3);
-        $poi->picture4 = Storage::disk('s3')->url($picture4);
-        $poi->picture5 = Storage::disk('s3')->url($picture5);
-        $poi->picture6 = Storage::disk('s3')->url($picture6);
         $poi->category_id = $category->id;
 
         $poi->save();
@@ -164,7 +170,7 @@ class PoiController extends Controller
      *
 
      */
-    public function update(Request $request, Company $company, Poi $poi)
+    public function update(Request $request,  $company, Poi $poi)
     {
         //
         $request->validate([
@@ -179,7 +185,14 @@ class PoiController extends Controller
         $poi->name = $request->name;
         $poi->description = $request->description;
         $poi->url = $request->url;
-        $poi->category_id = $request->category;
+        // $category_id = Category::where(['company_id' => $company, 'name' => $request->category])->first();
+        $category_id =
+            Category::firstOrCreate([
+                'name' => $request->category,
+                'company_id' => $company,
+            ]);
+        $poi->category_id = $category_id->id;
+        // $request->category;
         $poi->save();
 
 

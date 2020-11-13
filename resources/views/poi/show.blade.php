@@ -35,37 +35,37 @@
         <div>
             <div class="container" style="display: flex; flex-direction:row; flex-wrap:wrap">
 
+                @if($poi->picture1 != 'https://myguideapipictures.s3.eu-central-1.amazonaws.com/pictures/placeholder-image.png')
                 <div class="card" style="width: 18rem;">
-
                     <img src="{{$poi->picture1}}" class="card-img-top" alt="">
-
                 </div>
+                @endif
 
+                @if($poi->picture2 != 'https://myguideapipictures.s3.eu-central-1.amazonaws.com/pictures/placeholder-image.png')
                 <div class="card" style="width: 18rem;">
-
                     <img src="{{$poi->picture2}}" class="d-block w-100" alt="">
-
                 </div>
+                @endif
+                @if($poi->picture3 != 'https://myguideapipictures.s3.eu-central-1.amazonaws.com/pictures/placeholder-image.png')
                 <div class="card" style="width: 18rem;">
-
                     <img src="{{$poi->picture3}}" class="d-block w-100" alt="">
-
                 </div>
+                @endif
+                @if($poi->picture4 != 'https://myguideapipictures.s3.eu-central-1.amazonaws.com/pictures/placeholder-image.png')
                 <div class="card" style="width: 18rem;">
-
                     <img src="{{$poi->picture4}}" class="d-block w-100" alt="">
-
                 </div>
+                @endif
+                @if($poi->picture5 != 'https://myguideapipictures.s3.eu-central-1.amazonaws.com/pictures/placeholder-image.png')
                 <div class="card" style="width: 18rem;">
-
                     <img src="{{$poi->picture5}}" class="d-block w-100" alt="">
-
                 </div>
+                @endif
+                @if($poi->picture6 != 'https://myguideapipictures.s3.eu-central-1.amazonaws.com/pictures/placeholder-image.png')
                 <div class="card" style="width: 18rem;">
-
                     <img src="{{$poi->picture6}}" class="d-block w-100" alt="">
-
                 </div>
+                @endif
             </div>
 
             <div class="center">

@@ -24,6 +24,12 @@ class CreatePois extends Migration
             $table->text('description');
             $table->text('url')->unique();
             $table->foreignId('category_id')->constrained('categories');
+            $table->string('picture1')->default('https://myguideapipictures.s3.eu-central-1.amazonaws.com/pictures/placeholder-image.png');
+            $table->string('picture2')->default('https://myguideapipictures.s3.eu-central-1.amazonaws.com/pictures/placeholder-image.png');
+            $table->string('picture3')->default('https://myguideapipictures.s3.eu-central-1.amazonaws.com/pictures/placeholder-image.png');
+            $table->string('picture4')->default('https://myguideapipictures.s3.eu-central-1.amazonaws.com/pictures/placeholder-image.png');
+            $table->string('picture5')->default('https://myguideapipictures.s3.eu-central-1.amazonaws.com/pictures/placeholder-image.png');
+            $table->string('picture6')->default('https://myguideapipictures.s3.eu-central-1.amazonaws.com/pictures/placeholder-image.png');
         });
     }
 

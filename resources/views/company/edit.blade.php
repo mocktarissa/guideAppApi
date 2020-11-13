@@ -41,15 +41,42 @@
                 @method('PUT')
                 <label for="name">Company Name</label>
                 <input type="text" id="name" name="name" value="{{ $company->name }}" class="form-control">
-                <label for=" adress">Address</label>
-                <input type="text" id="adress" name="address" value="{{ $company->address }}" class="form-control">
+
                 <label for=" phone_number">Phone Number</label>
                 <input type="tel" id="phone_number" name='phone_number' value="{{ $company->phone_number }}" class="form-control">
                 <label for=" website"> Website </label>
                 <input type="url" name='website' id='website' value="{{ $company->website }}" class="form-control">
-                <label for="logo"> Company Logo </label>
-                <input type="file" name='logo' id='logo' class="form-control">
-                <br>
+
+
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" class="form-control" value="{{$company->city}}">
+
+                <label for='province'>Province</label>
+                <input type="text" id='province' name='province' class="form-control" value="{{$company->province}}">
+
+                <label for='neighbourhood'>Neighbourhood</label>
+                <input type="text" id='neighbourhood' name='neighbourhood' class="form-control" value="{{$company->neighbourhood}}">
+
+                <label for='address_line1'>Address Line 1</label>
+                <input type="text" id='address_line1' name='address_line1' class="form-control" value="{{$company->address_line1}}">
+
+                <label for='address_line2'>Address Line 2</label>
+                <input type="text" id='address_line2' name='address_line2' class="form-control" value="{{$company->address_line2}}">
+
+                <label for='postal_code'>Postal Code</label>
+                <input type="text" id='postal_code' name='postal_code' class="form-control" value="{{$company->postal_code}}">
+
+
+
+                <div>
+
+                    <label for="logo"> Company Logo </label>
+                    <br>
+                    <img src="{{$company->logo}}" alt="logo" width="60">
+                    <input type="file" name='logo' id='logo' class="form-control">
+                    <br>
+
+                </div>
                 <button type="submit" class='btn btn-primary'>Save</button>
                 <a href="{{route('company.index')}}" class="btn btn-info">Return to Main list</a>
             </div>

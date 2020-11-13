@@ -20,10 +20,20 @@ class CreateCompany extends Migration
             $table->timestamps();
             $table->foreignId('user_id')->constrained('users');
             $table->string('name');
-            $table->string('address');
+
+            //adress 
+            $table->string('city');
+            $table->string('province');
+            $table->string('neighbourhood'); // mahalle
+            $table->text('address_line1');
+            $table->text('address_line2');
+            $table->string('postal_code')->nullable();
+            //address end 
             $table->string('phone_number');
             $table->text('website');
             $table->text('longlatt')->nullable();
+            $table->string('category')->nullable();
+            $table->string('logo')->default('placeholder.jpg');
         });
     }
 

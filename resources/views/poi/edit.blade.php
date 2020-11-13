@@ -29,19 +29,39 @@
             @csrf
             @method('PUT')
             <label for="name">Name of Attraction</label>
-            <input type="text" id="name" name="name" value="{{$poi->name}}" class='form-control'>
+            <input type="text" id="name" name="name" class="form-control" value="{{$poi->name}}">
             <label for="location">Location</label>
-            <input type="text" id="location" name="location" value="{{$poi->location}}" class='form-control'>
+            <input type="text" id="location" name="location" class="form-control" value="{{$poi->location}}">
             <label for="description">Description</label>
-            <input type="text" id="description" name='description' value="{{$poi->description}}" class='form-control'>
+            <input type="text" id="description" name='description' class="form-control" value="{{$poi->description}}">
+            <br>
             <label for="url"> Url </label>
-            <input type="url" name='url' id='url' value="{{$poi->url}}" class='form-control'>
-            <label for="category"></label>
-            <select name="category" class='form-control' id="category">
+            <input type="url" name='url' id='url' class="form-control" value="{{$poi->url}}">
+            <label for="url"> Category </label>
+            <input type="text" name="category" class="form-control" value="{{$poi->category->name}}">
 
-                <option value="{{$poi->category->id}}">{{$poi->category->name}}</option>
+            <label for="picture1"> Url </label>
+            <input type="file" name='picture1' id='picture1' class="form-control" value="{{$poi->picture1}}">
 
-            </select>
+
+
+
+            <label for="picture2"> Url </label>
+            <input type="file" name='picture2' id='picture2' class="form-control" value="{{$poi->picture2}}">
+
+            <label for="picture3"> Url </label>
+            <input type="file" name='picture3' id='picture3' class="form-control" value="{{$poi->picture3}}">
+
+            <label for="picture1"> Url </label>
+            <input type="file" name='picture4' id='picture4' class="form-control" value="{{$poi->picture4}}">
+
+
+
+            <label for="picture5"> Url </label>
+            <input type="file" name='picture5' id='picture5' class="form-control" value="{{$poi->picture5}}">
+
+            <label for="picture6"> Url </label>
+            <input type="file" name='picture6' id='picture6' class="form-control" value="{{$poi->picture6}}">
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>

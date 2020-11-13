@@ -9,6 +9,7 @@ use App\Http\Controllers\PoiApiController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QrCodeApiController;
 use App\Http\Controllers\QrCodeController;
+use App\Http\Controllers\SearchController;
 use App\Models\Category;
 
 /*
@@ -47,3 +48,4 @@ Route::get('/api/company/{company}/pois/{poi}', [PoiApiController::class, 'show'
 
 Route::get('/api/qrcode/{id}', [QrCodeApiController::class, 'show']);
 // Route::get('/poi/{id}/image', [PoiController::class, 'poiImage'])->name('poi.image');
+Route::get('/api/{q}', [SearchController::class, 'query_response']);

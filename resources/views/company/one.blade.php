@@ -29,23 +29,27 @@
         </div>
         @endif
         <h4>
-
+            <img src="{{$company->logo}}" alt="" width="150px" style="display: inline;">
             <b> {{ $company->name }}</b>
         </h4>
-        <img src="{{$company->logo}}" alt="" width="150px">
+
         <div class=" text-center">
-            <p>Id: {{ $company->id }}</p>
-            <p>This is: {{ $company->name }}</p>
-            <p>Website: {{ $company->website }}</p>
+
+            <p> <b>City:</b> {{ $company->city }}</p>
+            <p> <b>Website:</b> <a href="{{ $company->website }}" target="_blank" rel="noopener noreferrer">{{ $company->website }}</a></p>
             <form action="/company/delete" method="post">
                 <button type="submit">
                     Delete
                 </button>
             </form>
-            <a href="{{route('company.pois.index',$company->id)}}" class="btn btn-primary">Show Poi</a>
+            <a href="{{route('company.pois.index',$company->id)}}" class="btn btn-danger">Show Poi</a>
             <a href="/company/{{$company->id}}/pois/create" class="btn btn-warning">Create New Poi</a>
-            <a href="{{route('company.index')}}" class="btn btn-info">Return to Main list</a>
+            <a href="{{ route('company.edit', $company->id) }}" class='btn btn-primary'>
+                <i class="fa fa-edit"></i>
+                Edit
+            </a>
             <a href="{{route('company.qrcode.create',$company)}}" class="btn btn-secondary">Create Qr code</a>
+            <a href="{{route('company.index')}}" class="btn btn-info">Return to Main list</a>
         </div>
     </div>
 
