@@ -29,8 +29,8 @@
 
                     @csrf
                     <label for="name">Create a new POI</label>
-                    <input type="text" id="name" name="name" class="form-control">
-                    <label for="location">Location</label>
+                    <input type="text" id="name" name="name" class="form-control" value="{{ old('name') }}>
+                    <label for=" location">Location</label>
                     <input type="text" id="location" name="location" class="form-control">
                     <label for="description">Description</label>
                     <textarea id="description" name='description' class="form-control">
