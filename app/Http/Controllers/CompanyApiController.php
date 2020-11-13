@@ -17,7 +17,7 @@ class CompanyApiController extends Controller
     public function index()
     {
         //
-        $companies = Company::select('id', 'name', 'address', 'phone_number', 'website', 'longlatt', 'logo')
+        $companies = Company::select('id', 'name', 'city',    'province', 'neighbourhood', 'address_line1', 'address_line2', 'postal_code', 'phone_number', 'website', 'longlatt', 'logo')
             ->orderBy('created_at', 'asc')
             ->get();
 
