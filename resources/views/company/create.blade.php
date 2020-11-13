@@ -61,13 +61,10 @@
 
             <label for='postal_code'>Postal Code</label>
             <input type="text" id='postal_code' name='postal_code' class="form-control">
-
             <label for="logo"> Company Logo </label>
             <input type="file" name='logo' id='logo' class="form-control">
-
             <label for="longlatt"> Long Latt </label>
             <input type="text" name='longlatt' id='longlatt' class="form-control">
-
             <button type="submit" class="btn btn-primary">Create</button>
             <a href="/company/list" class="btn">Return to Main list</a>
         </form>
