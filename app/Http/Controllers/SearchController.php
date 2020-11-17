@@ -27,21 +27,29 @@ class SearchController extends Controller
             ->where(
                 'name',
                 'like',
-                '%' . $request->input('query') . '%'
+                $request->input('query') . '%'
 
             )->orWhere(
                 'city',
                 'like',
-                '%' . $request->input('query') . '%'
-            )->orWhere('category', 'like', '%' . $request->input('query') . '%')
+                $request->input('query') . '%'
+            )->orWhere(
+                'category',
+                'like',
+                $request->input('query') . '%'
+            )
             ->get();
 
         $pois = DB::table('pois')->join('categories', 'categories.company_id', '=', 'pois.company_id')->select('*')
             ->where(
                 'categories.name',
                 'like',
-                '%' . $request->input('query') . '%'
-            )->orWhere('pois.name', 'like', '%' . $request->input('query') . '%')
+                $request->input('query') . '%'
+            )->orWhere(
+                'pois.name',
+                'like',
+                $request->input('query') . '%'
+            )
             ->get();
 
         return json_encode(['companies' => $companies, 'pois' => $pois]);
