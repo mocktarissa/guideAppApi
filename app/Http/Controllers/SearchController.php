@@ -15,7 +15,14 @@ class SearchController extends Controller
     public function index(Request $request)
     {
         // select from both Company table and 
-
+        $categories =
+            DB::table('categories')->select('*')
+            ->where(
+                'name',
+                'like',
+                '%' . $request->input('query') . '%'
+            )
+            ->get();
         $companies = DB::table('companys')->select('*')
             ->where(
                 'name',
@@ -29,13 +36,14 @@ class SearchController extends Controller
             )->orWhere('category', 'like', '%' . $request->input('query') . '%')
             ->get();
 
-        $pois = DB::table('pois')->select('*')
+        $pois = DB::table('pois')->join('categories', 'categories.company_id', '=', 'pois.company_id')->select('*')
             ->where(
-                'name',
+                'categories.name',
                 'like',
                 '%' . $request->input('query') . '%'
-            )
+            )->orWhere('pois.name', 'like', '%' . $request->input('query') . '%')
             ->get();
+
         return json_encode(['companies' => $companies, 'pois' => $pois]);
     }
 
