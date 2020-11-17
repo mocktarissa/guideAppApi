@@ -37,7 +37,7 @@ class SearchController extends Controller
             )->orWhereRaw(
                 'lower(`pois`.`name`) LIKE ? ',
                 trim(strtolower($request->input('query')) . '%'),
-            )->groupBy('pois.id',)
+            )
             ->get();
 
         return json_encode(['companies' => $companies, 'pois' => $pois]);
