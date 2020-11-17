@@ -17,11 +17,16 @@ class SearchController extends Controller
         // select from both Company table and 
 
         $companies = DB::table('companys')->select('*')
-            ->where([
-                ['name', 'like', '%' . $request->input('query') . '%'],
-                ['city', 'like', '%' . $request->input('query') . '%'],
-                ['category', 'like', '%' . $request->input('query') . '%']
-            ])
+            ->where(
+                'name',
+                'like',
+                '%' . $request->input('query') . '%'
+
+            )->orWhere(
+                'city',
+                'like',
+                '%' . $request->input('query') . '%'
+            )->orWhere('category', 'like', '%' . $request->input('query') . '%')
             ->get();
 
         $pois = DB::table('pois')->select('*')
