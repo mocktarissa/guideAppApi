@@ -15,40 +15,28 @@ class SearchController extends Controller
     public function index(Request $request)
     {
         // select from both Company table and 
-        $categories =
-            DB::table('categories')->select('*')
-            ->where(
-                'name',
-                'like',
-                '%' . $request->input('query') . '%'
-            )
-            ->get();
-        $companies = DB::table('companys')->select('*')
-            ->where(
-                'name',
-                'like',
-                $request->input('query') . '%'
 
-            )->orWhere(
-                'city',
-                'like',
-                $request->input('query') . '%'
-            )->orWhere(
-                'category',
-                'like',
-                $request->input('query') . '%'
+        $companies = DB::table('companys')->select('*')
+            ->whereRaw(
+                'LOWER(`name`) LIKE ? ',
+                strtolower($request->input('query')) . '%',
+
+            )->orWhereRaw(
+                'LOWER(`city`) LIKE ? ',
+                strtolower($request->input('query')) . '%',
+            )->orWhereRaw(
+                'LOWER(`category`) LIKE ? ',
+                strtolower($request->input('query')) . '%',
             )
             ->get();
 
         $pois = DB::table('pois')->leftJoin('categories', 'categories.company_id', '=', 'pois.company_id')->select('pois.*')
-            ->where(
-                'categories.name',
-                'like',
-                $request->input('query') . '%'
-            )->orWhere(
-                'pois.name',
-                'like',
-                $request->input('query') . '%'
+            ->whereRaw(
+                'LOWER(`categories.name`) LIKE ? ',
+                strtolower($request->input('query')) . '%',
+            )->orWhereRaw(
+                'LOWER(`pois.name`) LIKE ? ',
+                strtolower($request->input('query')) . '%',
             )->groupBy('pois.id')
             ->get();
 
