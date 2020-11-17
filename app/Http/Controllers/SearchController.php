@@ -40,7 +40,7 @@ class SearchController extends Controller
             )
             ->get();
 
-        $pois = DB::table('pois')->join('categories', 'categories.company_id', '=', 'pois.company_id')->select('*')
+        $pois = DB::table('pois')->join('categories', 'categories.company_id', '=', 'pois.company_id')->select('pois.*')
             ->where(
                 'categories.name',
                 'like',
