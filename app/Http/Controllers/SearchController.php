@@ -17,15 +17,18 @@ class SearchController extends Controller
         // select from both Company table and 
 
         $companies = DB::table('companys')->select('*')
-            ->whereRaw(
-                'LOWER(`name`) LIKE ? ',
+            ->where(
+                'LOWER(`name`)',
+                'LIKE',
                 $request->input('query'),
 
-            )->orWhereRaw(
-                'LOWER(`city`) LIKE ? ',
+            )->orWhere(
+                'LOWER(`city`)',
+                'LIKE',
                 $request->input('query'),
             )->orWhereRaw(
-                'LOWER(`category`) LIKE ? ',
+                'LOWER(`category`)',
+                'LIKE',
                 $request->input('query'),
             )
             ->get();
