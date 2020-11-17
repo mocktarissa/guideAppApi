@@ -19,24 +19,25 @@ class SearchController extends Controller
         $companies = DB::table('companys')->select('*')
             ->whereRaw(
                 'LOWER(`name`) LIKE ? ',
-                strtolower($request->input('query')) . '%',
+                [trim(strtolower($request->input('query')) . '%')],
+
 
             )->orWhereRaw(
                 'LOWER(`city`) LIKE ? ',
-                strtolower($request->input('query')) . '%',
+                [trim(strtolower($request->input('query')) . '%')],
             )->orWhereRaw(
                 'LOWER(`category`) LIKE ? ',
-                strtolower($request->input('query')) . '%',
+                [trim(strtolower($request->input('query')) . '%')],
             )
             ->get();
 
         $pois = DB::table('pois')->leftJoin('categories', 'categories.company_id', '=', 'pois.company_id')->select('pois.*')
             ->whereRaw(
                 'LOWER(`categories.name`) LIKE ? ',
-                strtolower($request->input('query')) . '%',
+                [trim(strtolower($request->input('query')) . '%')],
             )->orWhereRaw(
                 'LOWER(`pois.name`) LIKE ? ',
-                strtolower($request->input('query')) . '%',
+                [trim(strtolower($request->input('query')) . '%')],
             )->groupBy('pois.id')
             ->get();
 
