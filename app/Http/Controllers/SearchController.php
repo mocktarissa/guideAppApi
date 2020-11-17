@@ -19,14 +19,14 @@ class SearchController extends Controller
         $companies = DB::table('companys')->select('*')
             ->whereRaw(
                 'lower(`name`) LIKE ? ',
-                '`' . [strtolower($request->input('query') . '%')] . '`',
+                '`' . strtolower($request->input('query') . '%') . '`',
 
             )->orWhereRaw(
                 'lower(`city`) LIKE ? ',
-                '`' . [strtolower($request->input('query') . '%')] . '`',
+                '`' . strtolower($request->input('query') . '%') . '`',
             )->orWhereRaw(
                 'lower(`category`) LIKE ? ',
-                '`' . [strtolower($request->input('query') . '%')] . '`',
+                '`' . strtolower($request->input('query') . '%') . '`',
             )
             ->get();
 
@@ -34,10 +34,10 @@ class SearchController extends Controller
             ->whereRaw(
                 'lower(`categories`.`name`) LIKE ? ',
                 '`' .
-                    [strtolower($request->input('query') . '%')] . '`',
+                    strtolower($request->input('query') . '%') . '`',
             )->orWhereRaw(
                 'lower(`pois`.`name`) LIKE ? ',
-                '`' . [strtolower($request->input('query') . '%')] . '`',
+                '`' . strtolower($request->input('query') . '%') . '`',
             )
             ->get();
 
