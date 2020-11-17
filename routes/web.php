@@ -48,4 +48,4 @@ Route::get('/api/company/{company}/pois/{poi}', [PoiApiController::class, 'show'
 
 Route::get('/api/qrcode/{id}', [QrCodeApiController::class, 'show']);
 // Route::get('/poi/{id}/image', [PoiController::class, 'poiImage'])->name('poi.image');
-Route::get('/api/{q}', [SearchController::class, 'query_response']);
+Route::get('/api/{query}', [SearchController::class, 'index']);
