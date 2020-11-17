@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 class SearchController extends Controller
 {
     /**
@@ -15,21 +16,22 @@ class SearchController extends Controller
     {
         // select from both Company table and 
 
-        $companies = DB::table('companys')->select('name', 'email as user_email')
-        ->where(
-            ['name', 'like', '%'.$request-> query . '%'],
-            ['city', 'like', '%' . $request->query . '%'],
-            ['category', 'like', '%' . $request->query . '%']
-        )
-        ->get();
+        $companies = DB::table('companys')->select('*')
+            ->where([
+                ['name', 'like', '%' . $request->input('query') . '%'],
+                ['city', 'like', '%' . $request->input('query') . '%'],
+                ['category', 'like', '%' . $request->input('query') . '%']
+            ])
+            ->get();
 
-        $pois= DB::table('pois')->select('name', 'email as user_email')
-        ->where(
-            ['name', 'like', '%' . $request->query . '%'],
-        )
-        ->get();
-return json_encode(['companies'=>$companies,'pois'=>$pois]);
-
+        $pois = DB::table('pois')->select('*')
+            ->where(
+                'name',
+                'like',
+                '%' . $request->input('query') . '%'
+            )
+            ->get();
+        return json_encode(['companies' => $companies, 'pois' => $pois]);
     }
 
     /**
@@ -97,10 +99,10 @@ return json_encode(['companies'=>$companies,'pois'=>$pois]);
     {
         //
     }
-    public function query_response(Request $request)
-    {
-        $query =        $request->q;
-        $val= 
-        
-    }
+    // public function query_response(Request $request)
+    // {
+    //     $query =        $request->q;
+    //     $val= 
+
+    // }
 }
