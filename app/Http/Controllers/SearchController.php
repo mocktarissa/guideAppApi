@@ -49,7 +49,7 @@ class SearchController extends Controller
                 'pois.name',
                 'like',
                 $request->input('query') . '%'
-            )
+            )->groupBy('pois.name')
             ->get();
 
         return json_encode(['companies' => $companies, 'pois' => $pois]);
