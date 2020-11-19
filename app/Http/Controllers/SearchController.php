@@ -17,22 +17,22 @@ class SearchController extends Controller
         // select from both Company table and 
 
         $companies = DB::table('companys')
-            ->whereRaw('lower(`name`) LIKE ? ', [trim(strtolower($request->input('query'))) . '%'])->get();
-        // ->where(
-        //     'name',
-        //     'LIKE',
-        //     $request->input('query') . '%',
 
-        // )->orWhere(
-        //     'city',
-        //     'LIKE',
-        //     $request->input('query') . '%',
-        // )->orWhereRaw(
-        //     'category',
-        //     'LIKE',
-        //     $request->input('query') . '%',
-        // )
-        // ->get();
+            ->where(
+                'name',
+                'ILIKE',
+                $request->input('query') . '%',
+
+            )->orWhere(
+                'city',
+                'ILIKE',
+                $request->input('query') . '%',
+            )->orWhere(
+                'category',
+                'ILIKE',
+                $request->input('query') . '%',
+            )
+            ->get();
 
         $pois = DB::table('pois')->leftJoin('categories', 'categories.company_id', '=', 'pois.company_id')->select('pois.*')
             ->whereRaw(
