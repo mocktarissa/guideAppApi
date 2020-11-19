@@ -43,7 +43,7 @@ class SearchController extends Controller
                 'pois.name',
                 'ilike',
                 strtolower($request->input('query') . '%'),
-            )
+            )->groupBy('pois.id')
             ->get();
 
         return json_encode([
