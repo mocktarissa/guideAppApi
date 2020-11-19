@@ -16,35 +16,37 @@ class SearchController extends Controller
     {
         // select from both Company table and 
 
-        $companies = DB::table('companys')->select('*')
-            ->where(
-                'LOWER(`name`)',
-                'LIKE',
-                $request->input('query'),
+        $companies = DB::table('companys')->select('*')->whereRaw('LOWER(`name`) LIKE ? ', [trim(strtolower($request->input('query'))) . '%'])->get();
+        // ->where(
+        //     'name',
+        //     'LIKE',
+        //     $request->input('query') . '%',
 
-            )->orWhere(
-                'LOWER(`city`)',
-                'LIKE',
-                $request->input('query'),
+        // )->orWhere(
+        //     'city',
+        //     'LIKE',
+        //     $request->input('query') . '%',
+        // )->orWhereRaw(
+        //     'category',
+        //     'LIKE',
+        //     $request->input('query') . '%',
+        // )
+        // ->get();
+
+        $pois = DB::table('pois')->leftJoin('categories', 'categories.company_id', '=', 'pois.company_id')->select('pois.*')
+            ->whereRaw(
+                'lower(`categories`.`name`) LIKE ? ',
+
+                strtolower($request->input('query') . '%'),
             )->orWhereRaw(
-                'LOWER(`category`)',
-                'LIKE',
-                $request->input('query'),
+                'lower(`pois`.`name`) LIKE ? ',
+                '`' . strtolower($request->input('query') . '%') . '`',
             )
             ->get();
 
-        // $pois = DB::table('pois')->leftJoin('categories', 'categories.company_id', '=', 'pois.company_id')->select('pois.*')
-        //     ->whereRaw(
-        //         'lower(`categories`.`name`) LIKE ? ',
-        //         '`' .
-        //             strtolower($request->input('query') . '%') . '`',
-        //     )->orWhereRaw(
-        //         'lower(`pois`.`name`) LIKE ? ',
-        //         '`' . strtolower($request->input('query') . '%') . '`',
-        //     )
-        //     ->get();
-
-        return json_encode(['companies' => $companies, 'pois' => $pois]);
+        return json_encode(['companies' => $companies,
+            //  'pois' => $pois
+        ]);
     }
 
     /**
