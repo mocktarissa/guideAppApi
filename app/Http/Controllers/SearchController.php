@@ -34,16 +34,16 @@ class SearchController extends Controller
             )
             ->get();
 
-        $pois = DB::table('pois')->leftJoin('categories', 'categories.company_id', '=', 'pois.company_id')->select('pois.*')
-            ->whereRaw(
-                'lower(`categories`.`name`) LIKE ? ',
+        // $pois = DB::table('pois')->leftJoin('categories', 'categories.company_id', '=', 'pois.company_id')->select('pois.*')
+        //     ->whereRaw(
+        //         'lower(`categories`.`name`) LIKE ? ',
 
-                strtolower($request->input('query') . '%'),
-            )->orWhereRaw(
-                'lower(`pois`.`name`) LIKE ? ',
-                '`' . strtolower($request->input('query') . '%') . '`',
-            )
-            ->get();
+        //         strtolower($request->input('query') . '%'),
+        //     )->orWhereRaw(
+        //         'lower(`pois`.`name`) LIKE ? ',
+        //         '`' . strtolower($request->input('query') . '%') . '`',
+        //     )
+        //     ->get();
 
         return json_encode(['companies' => $companies,
             //  'pois' => $pois
