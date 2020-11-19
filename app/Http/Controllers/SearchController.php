@@ -16,7 +16,8 @@ class SearchController extends Controller
     {
         // select from both Company table and 
 
-        $companies = DB::table('companys')->select('*')->whereRaw('LOWER(`name`) LIKE ? ', [trim(strtolower($request->input('query'))) . '%'])->get();
+        $companies = DB::table('companys')
+            ->whereRaw('lower(`name`) LIKE ? ', [trim(strtolower($request->input('query'))) . '%'])->get();
         // ->where(
         //     'name',
         //     'LIKE',
