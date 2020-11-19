@@ -46,8 +46,9 @@ class SearchController extends Controller
             )
             ->get();
 
-        return json_encode(['companies' => $companies,
-            //  'pois' => $pois
+        return json_encode([
+            'companies' => $companies,
+            'pois' => $pois
         ]);
     }
 
